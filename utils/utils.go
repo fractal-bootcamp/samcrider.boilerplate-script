@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 
@@ -39,6 +40,30 @@ func Name_Project(label string) string {
 	survey.AskOne(prompt, &res)
 
 	return res
+}
+
+func Create_File(name string, file_content []string) {
+	// create file
+	file, err := os.Create(name)
+	if err != nil {
+		fmt.Println(err)
+		file.Close()
+		return
+	}
+
+	// loop through data and write lines
+	for _, v := range file_content {
+		_, err := fmt.Fprintln(file, v)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+	}
+	err = file.Close()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 }
 
 // func GenerateConstantsFromFiles (){

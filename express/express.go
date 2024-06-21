@@ -7,10 +7,6 @@ import (
 	"sam.crider/boilerplate-script/utils"
 )
 
-// func mkdir_chdir(name string) {
-
-// }
-
 func Express() {
 	// mkdir for backend, 0755 is the permission bits
 	err := os.Mkdir("backend", 0755)
@@ -34,31 +30,14 @@ func Express() {
 	}
 
 	// create index.ts file in new project
-	file, err := os.Create("index.ts")
-	if err != nil {
-		fmt.Println(err)
-		file.Close()
-		return
-	}
 	data := []string{
 		"import app from './app';",
 		"const PORT = [your port]",
 		"app.listen(PORT, () => {",
 		"console.log(`Server running on port ${PORT}`);",
 		"});"}
-
-	for _, v := range data {
-		_, err := fmt.Fprintln(file, v)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-	}
-	err = file.Close()
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	utils.Create_File("index.ts", data)
+	
 
 	// install cors, dotenv, express, nodemon, ts-node
 	cmd_deps := utils.BoundCommand("npm", "install", "express", "cors", "dotenv", "nodemon", "ts-node")
@@ -77,12 +56,6 @@ func Express() {
 	}
 
 	// make app.ts
-	file, err = os.Create("app.ts")
-	if err != nil {
-		fmt.Println(err)
-		file.Close()
-		return
-	}
 	data = []string{
 		"import express from 'express';",
 		"import cors from 'cors';",
@@ -97,27 +70,9 @@ func Express() {
 		"app.use('[path], [router]');",
 		"export default app;",
 	}
-
-	for _, v := range data {
-		_, err := fmt.Fprintln(file, v)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-	}
-	err = file.Close()
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	utils.Create_File("app.ts", data)
 
 	// make dockerfile
-	file, err = os.Create("docker-compose.yml")
-	if err != nil {
-		fmt.Println(err)
-		file.Close()
-		return
-	}
 	data = []string{
 		"version: '3.9'",
 		"services:",
@@ -130,19 +85,7 @@ func Express() {
 		"ports:",
 		" - ['example: 10002']:5432",
 	}
-
-	for _, v := range data {
-		_, err := fmt.Fprintln(file, v)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-	}
-	err = file.Close()
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	utils.Create_File("docker-compose.yml", data)
 
 	// initialize primsa
 	cmd_prisma := utils.BoundCommand("npx", "prisma", "init", "--datasource-provider", "postgreSQL")
@@ -165,29 +108,10 @@ func Express() {
 	}
 
 	// create client.ts file
-	file, err = os.Create("client.ts")
-	if err != nil {
-		fmt.Println(err)
-		file.Close()
-		return
-	}
-
 	data = []string{
 		"import { PrismaClient } from '@prisma/client';",
 		"const client = new PrismaClient();",
 		"export default client;",
 	}
-
-	for _, v := range data {
-		_, err := fmt.Fprintln(file, v)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-	}
-	err = file.Close()
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	utils.Create_File("client.ts", data)
 }
