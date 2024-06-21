@@ -1,3 +1,4 @@
+[
 "import app from './app';",
 "",
 "const PORT = ['your port'];",
@@ -5,3 +6,4 @@
 "app.listen(PORT, () => {",
 "	console.log(`Server running on port ${PORT}`);",
 "});",
+]

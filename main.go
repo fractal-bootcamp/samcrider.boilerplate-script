@@ -31,23 +31,23 @@ func _main() {
 		"What's the name of this project?",
 	)
 
-	// make sure the user has added their source files
-	result := utils.Select(
-		"The current source files will be generated: ",
-		[]string{
-			"Yes",
-			"No",
-		},
-	)
-
-	if result == "Yes" {
-		file_generator.Generate_Files()
-	} else {
-		fmt.Println("Go add your source files")
-		return
-	}
-
+	
 	if stack == "Vite + Express" {
+		// verify that the current source files should be serialized
+		result := utils.Select(
+			"Would you like the current source files for the backend to be serialized? ",
+			[]string{
+				"Yes",
+				"No",
+			},
+		)
+	
+		if result == "Yes" {
+			file_generator.Generate_Files()
+		} else {
+			fmt.Println("Go add your source files")
+			return
+		}
 		// create a directory for the project, 0755 is the permission bits
 		err := os.Mkdir(project_name, 0755)
 		if err != nil {

@@ -41,8 +41,16 @@ func serialize_lines(file fs.DirEntry) {
 		return
 	}
 
+	// write the open bracket
+	_, err = fmt.Fprintln(generated_file, "[")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
 	// read each line of the current file
 	for file_scanner.Scan() {
+
 		// change any double quotes to single quotes
 		dirtyText := file_scanner.Text()
 		cleanText := scrub(dirtyText)
@@ -60,6 +68,14 @@ func serialize_lines(file fs.DirEntry) {
 		generated_file.Close()
 		return
 	}
+
+	// write the close bracket
+	_, err = fmt.Fprintln(generated_file, "]")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
 	// close the files
 	source_file.Close()
 	generated_file.Close()
