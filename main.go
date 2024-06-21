@@ -7,13 +7,18 @@ import (
 	"os"
 
 	express_boil "sam.crider/boilerplate-script/express"
+	"sam.crider/boilerplate-script/file_generator"
 	"sam.crider/boilerplate-script/utils"
 	vite_boil "sam.crider/boilerplate-script/vite"
 )
 
 func main() {
+	file_generator.Generate_Files()
+}
+
+func _main() {
 	// get the user's selected stack
-	stack := utils.Select_Stack(
+	stack := utils.Select(
 		"Select Your Build Stack:",
 		[]string{
 			"Vite + Express",
@@ -25,6 +30,22 @@ func main() {
 	project_name := utils.Name_Project(
 		"What's the name of this project?",
 	)
+
+	// make sure the user has added their source files
+	result := utils.Select(
+		"The current source files will be generated: ",
+		[]string{
+			"Yes",
+			"No",
+		},
+	)
+
+	if result == "Yes" {
+		file_generator.Generate_Files()
+	} else {
+		fmt.Println("Go add your source files")
+		return
+	}
 
 	if stack == "Vite + Express" {
 		// create a directory for the project, 0755 is the permission bits

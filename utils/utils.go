@@ -21,7 +21,7 @@ func BoundCommand(name string, arg ...string) (*exec.Cmd) {
 	return command
 }
 
-func Select_Stack(label string, opts []string) string {
+func Select(label string, opts []string) string {
 	res := ""
 	prompt := &survey.Select{
 		Message: label,
