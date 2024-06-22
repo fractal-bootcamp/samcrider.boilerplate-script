@@ -6,13 +6,15 @@ import (
 	"fmt"
 	"os"
 
+	generated "sam.crider/boilerplate-script/file_generator/generated_files"
+
 	express_boil "sam.crider/boilerplate-script/express"
 	"sam.crider/boilerplate-script/utils"
 	vite_boil "sam.crider/boilerplate-script/vite"
 )
 
 func main() {
-	express_boil.Express_FirebaseAuth()
+	vite_boil.Vite_NoAuth()
 }
 
 func _main() {

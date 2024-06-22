@@ -13,7 +13,7 @@ var File__firebaseAuthApp = []string{
 "app.use(",
 "	cors({",
 "		origin: ['origin(s)'],",
-"		allowedHeaders: ['headers'],",
+"		allowedHeaders: ['Authorization', 'Content-Type'],",
 "	})",
 ");",
 "",
