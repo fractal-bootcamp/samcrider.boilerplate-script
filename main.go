@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	vite_boil.Vite_FirebaseAuth()
+	express_boil.Express_NoAuth()
 }
 
 func _main() {
@@ -32,6 +32,7 @@ func _main() {
 		"What's the name of this project?",
 	)
 
+	// get users auth preference
 	auth_integration := utils.Select(
 		"Pick an auth integration:",
 		[]string{
@@ -41,6 +42,7 @@ func _main() {
 		},
 	)
 
+	// TODO: make this a switch case
 	if stack == "Vite + Express" {
 		// create a directory for the project, 0755 is the permission bits
 		err := os.Mkdir(project_name, 0755)
@@ -63,6 +65,7 @@ func _main() {
 			return
 		}
 
+		// TODO: make this a switch case
 		if auth_integration == "Firebase" {
 			// add readme
 			utils.Create_File("README.md", generated.File__viteExpressFirebaseReadme)

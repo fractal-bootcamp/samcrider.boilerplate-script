@@ -6,7 +6,7 @@ const app = express();
 app.use(
 	cors({
 		origin: ['origin(s)'],
-		allowedHeaders: ['headers'],
+		allowedHeaders: ['Content-Type'],
 	})
 );
 		

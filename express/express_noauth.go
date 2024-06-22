@@ -50,7 +50,7 @@ func Express_NoAuth() {
 	}
 
 	// make app.ts
-	utils.Create_File("app.ts", generated.File__app)
+	utils.Create_File("app.ts", generated.File__noAuthApp)
 
 	// make dockerfile
 	utils.Create_File("docker-compose.yml", generated.File__docker)
@@ -58,6 +58,52 @@ func Express_NoAuth() {
 	// initialize primsa
 	cmd_prisma := utils.BoundCommand("npx", "prisma", "init", "--datasource-provider", "postgreSQL")
 	if err := cmd_prisma.Run(); err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// replace the .env file
+	err = os.Remove(".env")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	utils.Create_File(".env", generated.File__firebaseEnv)
+
+	// cd into prisma
+	err = os.Chdir("prisma")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// remove the schema and create a new one
+	err = os.Remove("schema.prisma")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	utils.Create_File("schema.prisma", generated.File__noAuthPrismaSchema)
+
+	// cd out of prisma
+	err = os.Chdir("..")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// docker compose up
+	cmd_dockerUp := utils.BoundCommand("docker", "compose", "up", "-d")
+	if err := cmd_dockerUp.Run(); err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// run a db migration
+	cmd_migration := utils.BoundCommand("npx", "prisma", "migrate", "dev")
+	if err := cmd_migration.Run(); err != nil {
 		fmt.Println(err)
 		return
 	}
@@ -77,4 +123,58 @@ func Express_NoAuth() {
 
 	// create client.ts file
 	utils.Create_File("client.ts", generated.File__client)
+
+	// cd out of utils
+	err = os.Chdir("..")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// mkdir lib
+	err = os.Mkdir("lib", 0755)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// cd lib
+	err = os.Chdir("lib")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// mkdir controllers
+	err = os.Mkdir("controllers", 0755)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// cd into controllers
+	err = os.Chdir("controllers")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// mkdir users
+	err = os.Mkdir("users", 0755)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// cd into users
+	err = os.Chdir("users")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// create service file and types file
+	utils.Create_File("controller.ts", generated.File__noAuthController)
+	utils.Create_File("types.ts", generated.File__firebaseAuthTypes)
+
 }

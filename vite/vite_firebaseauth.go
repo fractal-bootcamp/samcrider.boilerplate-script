@@ -25,6 +25,14 @@ func Vite_FirebaseAuth() {
 		return
 	}
 
+	// npm install all the vite packages
+	cmd = utils.BoundCommand("npm", "install")
+
+	if err := cmd.Run(); err != nil {
+		fmt.Println(err)
+		return
+	}
+
 	// import deps
 	cmd = utils.BoundCommand("npm", "install", "axios", "firebase")
 
@@ -128,14 +136,14 @@ func Vite_FirebaseAuth() {
 		return
 	}
 
-	// mkdir's firebase and service
+	// mkdir's firebase and services
 	err = os.Mkdir("firebase", 0755)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	err = os.Mkdir("service", 0755)
+	err = os.Mkdir("services", 0755)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -151,22 +159,22 @@ func Vite_FirebaseAuth() {
 	// created firebase config
 	utils.Create_File("config.ts", generated.File__firebaseFrontConfig)
 
-	// cd into service
+	// cd into services
 	err = os.Chdir("../service")
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	// mkdir Auth
-	err = os.Mkdir("Auth", 0755)
+	// mkdir auth
+	err = os.Mkdir("auth", 0755)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	// cd into Auth
-	err = os.Chdir("Auth")
+	// cd into auth
+	err = os.Chdir("auth")
 	if err != nil {
 		fmt.Println(err)
 		return
