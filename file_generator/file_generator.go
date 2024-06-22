@@ -11,7 +11,7 @@ import (
 func scrub(line string) string {
 	cleaner := func(r rune) rune {
 		if r == '"' {
-			return '\''
+			return '\"'
 		}
 		return r
 	}
@@ -68,7 +68,7 @@ func serialize_lines(file fs.DirEntry) {
 		cleanText := scrub(dirtyText)
 
 		// write the current line into the generated file with quotes and a comma
-		_, err := fmt.Fprintln(generated_file, `"`+cleanText+`",`)
+		_, err := fmt.Fprintln(generated_file, "\""+cleanText+"\",")
 		if err != nil {
 			fmt.Println(err)
 			return
