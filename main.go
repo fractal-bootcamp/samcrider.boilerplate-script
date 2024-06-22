@@ -7,16 +7,11 @@ import (
 	"os"
 
 	express_boil "sam.crider/boilerplate-script/express"
-	"sam.crider/boilerplate-script/file_generator"
 	"sam.crider/boilerplate-script/utils"
 	vite_boil "sam.crider/boilerplate-script/vite"
 )
 
 func main() {
-	file_generator.Generate_Files()
-}
-
-func _main() {
 	// get the user's selected stack
 	stack := utils.Select(
 		"Select Your Build Stack:",
@@ -33,21 +28,6 @@ func _main() {
 
 	
 	if stack == "Vite + Express" {
-		// verify that the current source files should be serialized
-		result := utils.Select(
-			"Would you like the current source files for the backend to be serialized? ",
-			[]string{
-				"Yes",
-				"No",
-			},
-		)
-	
-		if result == "Yes" {
-			file_generator.Generate_Files()
-		} else {
-			fmt.Println("Go add your source files")
-			return
-		}
 		// create a directory for the project, 0755 is the permission bits
 		err := os.Mkdir(project_name, 0755)
 		if err != nil {
