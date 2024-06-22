@@ -5,7 +5,7 @@ package generated
 var File__index = []string{
 "import app from './app';",
 "",
-"const PORT = ['your port'];",
+"const PORT = 3009;",
 "",
 "app.listen(PORT, () => {",
 "	console.log(`Server running on port ${PORT}`);",

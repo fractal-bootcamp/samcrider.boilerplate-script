@@ -12,6 +12,10 @@ import (
 )
 
 func main() {
+	express_boil.Express_FirebaseAuth()
+}
+
+func _main() {
 	// get the user's selected stack
 	stack := utils.Select(
 		"Select Your Build Stack:",
@@ -49,6 +53,7 @@ func main() {
 			fmt.Println(err)
 			return
 		}
+
 		// initialize git for the project
 		cmd := utils.BoundCommand("git", "init")
 		if err := cmd.Run(); err != nil {
@@ -57,24 +62,32 @@ func main() {
 		}
 
 		if auth_integration == "Firebase" {
+			// add readme
+			utils.Create_File("README.md", generated.File__viteExpressFirebaseReadme)
+
 			// create the frontend
-			vite_boil.Vite_FirebaseAuth()
+			// vite_boil.Vite_FirebaseAuth()
 
 			// create the backend
-			express_boil.Express_FirebaseAuth()
+			// express_boil.Express_FirebaseAuth()
 
 			fmt.Println("Success! Boilerplate created.")
 
 		} else if auth_integration == "Clerk" {
+			// add readme
+			utils.Create_File("README.md", generated.File__viteExpressClerkReadme)
+
 			// create the frontend
-			vite_boil.Vite_ClerkAuth()
+			// vite_boil.Vite_ClerkAuth()
 
 			// create the backend
-			express_boil.Express_ClerkAuth()
+			// express_boil.Express_ClerkAuth()
 
 			fmt.Println("Success! Boilerplate created.")
 
 		} else if auth_integration == "None" {
+			// add readme
+			utils.Create_File("README.md", generated.File__viteExpressNoAuthReadme)
 
 			// create the frontend
 			vite_boil.Vite_NoAuth()
