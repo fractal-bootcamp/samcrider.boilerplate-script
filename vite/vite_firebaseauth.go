@@ -160,7 +160,7 @@ func Vite_FirebaseAuth() {
 	utils.Create_File("config.ts", generated.File__firebaseFrontConfig)
 
 	// cd into services
-	err = os.Chdir("../service")
+	err = os.Chdir("../services")
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -184,4 +184,10 @@ func Vite_FirebaseAuth() {
 	utils.Create_File("service.ts", generated.File__firebaseFrontService)
 	utils.Create_File("types.ts", generated.File__firebaseFrontTypes)
 
+	// cd back to project root in preparation for creating the backend
+	err = os.Chdir("../../../../")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 }
