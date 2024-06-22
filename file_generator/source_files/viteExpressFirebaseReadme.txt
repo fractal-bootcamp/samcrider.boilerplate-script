@@ -11,6 +11,7 @@
 
 #### To connect to your backend:
 1. Add your backend's url to the frontend .env file
+2. Add this to your package.json: "proxy": "backend url",
 
 ## Backend
 #### To run backend: 

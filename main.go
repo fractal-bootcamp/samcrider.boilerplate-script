@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	vite_boil.Vite_NoAuth()
+	vite_boil.Vite_FirebaseAuth()
 }
 
 func _main() {
@@ -68,10 +68,10 @@ func _main() {
 			utils.Create_File("README.md", generated.File__viteExpressFirebaseReadme)
 
 			// create the frontend
-			// vite_boil.Vite_FirebaseAuth()
+			vite_boil.Vite_FirebaseAuth()
 
 			// create the backend
-			// express_boil.Express_FirebaseAuth()
+			express_boil.Express_FirebaseAuth()
 
 			fmt.Println("Success! Boilerplate created.")
 
