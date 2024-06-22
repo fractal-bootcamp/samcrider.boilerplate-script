@@ -65,8 +65,3 @@ func Create_File(name string, file_content []string) {
 		return
 	}
 }
-
-// func GenerateConstantsFromFiles (){
-// 	// crawl through the directory and transform *.constant.txt files to constant string arrays
-// 	// parse those files and write them to a new .generated.go file
-// }
