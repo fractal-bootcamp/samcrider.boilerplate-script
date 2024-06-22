@@ -5,7 +5,7 @@ package generated
 var File__firebaseAuthApp = []string{
 "import express from \"express\";",
 "import cors from \"cors\";",
-"import authRouter from \"./lib/controllers/Auth/controller\";",
+"import authRouter from \"./lib/controllers/auth/controller\";",
 "import { requireAuth } from \"./utils/requireAuth\";",
 "",
 "const app = express();",

@@ -187,15 +187,15 @@ func Express_FirebaseAuth() {
 		return
 	}
 
-	// mkdir Auth
-	err = os.Mkdir("Auth", 0755)
+	// mkdir auth
+	err = os.Mkdir("auth", 0755)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
 	// cd into it
-	err = os.Chdir("Auth")
+	err = os.Chdir("auth")
 	if err != nil {
 		fmt.Println(err)
 		return
