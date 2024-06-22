@@ -6,8 +6,7 @@ import (
 	"sam.crider/boilerplate-script/utils"
 )
 
-
-func Vite() {
+func Vite_NoAuth() {
 	cmd := utils.BoundCommand("npm", "create", "vite@latest")
 
 	if err := cmd.Run(); err != nil {

@@ -8,7 +8,7 @@ import (
 	"sam.crider/boilerplate-script/utils"
 )
 
-func Express() {
+func Express_NoAuth() {
 	// mkdir for backend, 0755 is the permission bits
 	err := os.Mkdir("backend", 0755)
 	if err != nil {
@@ -32,7 +32,6 @@ func Express() {
 
 	// create index.ts file in new project
 	utils.Create_File("index.ts", generated.File__index)
-	
 
 	// install cors, dotenv, express, nodemon, ts-node
 	cmd_deps := utils.BoundCommand("npm", "install", "express", "cors", "dotenv", "nodemon", "ts-node")
