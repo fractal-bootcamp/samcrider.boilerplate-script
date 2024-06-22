@@ -52,6 +52,7 @@ func Express_FirebaseAuth() {
 	// make app.ts
 	utils.Create_File("app.ts", generated.File__firebaseAuthApp)
 
+	// make firebase service account key file
 	utils.Create_File("serviceAccountKey.json", generated.File__serviceAccountKey)
 
 	// make dockerfile
