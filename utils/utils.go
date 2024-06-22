@@ -42,7 +42,7 @@ func Name_Project(label string) string {
 	return res
 }
 
-func closeFile(f *os.File) {
+func CloseFile(f *os.File) {
 	err := f.Close()
 	if err != nil {
 		fmt.Println(err)
@@ -53,15 +53,13 @@ func closeFile(f *os.File) {
 func Create_File(name string, file_content []string) {
 	// create file
 	file, err := os.Create(name)
-
-	// makes sure the file closes when function finishes execution
-	defer closeFile(file)
-
-	// if error creating file
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
+
+	// makes sure the file closes when function finishes execution
+	defer CloseFile(file)
 
 	// loop through data and write lines
 	for _, v := range file_content {

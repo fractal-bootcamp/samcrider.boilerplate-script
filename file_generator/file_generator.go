@@ -6,6 +6,8 @@ import (
 	"io/fs"
 	"os"
 	"strings"
+
+	"sam.crider/boilerplate-script/utils"
 )
 
 func scrub(line string) string {
@@ -27,9 +29,11 @@ func serialize_lines(file fs.DirEntry) {
 	source_file, err := os.OpenFile("./file_generator/source_files/"+file.Name(), os.O_RDONLY, os.ModePerm)
 	if err != nil {
 		fmt.Println(err)
-		source_file.Close()
 		return
 	}
+	
+	// ensure the file is closed once the function finishes execution
+	defer utils.CloseFile(source_file)
 
 	// initialize the file scanner
 	file_scanner := bufio.NewScanner(source_file)
@@ -44,6 +48,9 @@ func serialize_lines(file fs.DirEntry) {
 		fmt.Println(err)
 		return
 	}
+
+	// ensure the file is closed once the function finishes execution
+	defer utils.CloseFile(generated_file)
 
 	// write the package and define the constant
 	file_name_split = strings.Split(file.Name(), ".")
@@ -76,8 +83,6 @@ func serialize_lines(file fs.DirEntry) {
 	}
 	if err := file_scanner.Err(); err != nil {
 		fmt.Println(err)
-		source_file.Close()
-		generated_file.Close()
 		return
 	}
 
@@ -87,10 +92,6 @@ func serialize_lines(file fs.DirEntry) {
 		fmt.Println(err)
 		return
 	}
-
-	// close the files
-	source_file.Close()
-	generated_file.Close()
 }
 
 func Generate_Files() {
