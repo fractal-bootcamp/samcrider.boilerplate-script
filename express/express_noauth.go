@@ -71,15 +71,6 @@ func Express_NoAuth() {
 
 	utils.Create_File(".env", generated.File__firebaseEnv)
 
-	// // replace the gitignore file
-	// err = os.Remove(".gitignore")
-	// if err != nil {
-	// 	fmt.Println(err)
-	// 	return
-	// }
-
-	// utils.Create_File(".gitignore", generated.File__firebaseGitignore)
-
 	// cd into prisma
 	err = os.Chdir("prisma")
 	if err != nil {
@@ -132,4 +123,58 @@ func Express_NoAuth() {
 
 	// create client.ts file
 	utils.Create_File("client.ts", generated.File__client)
+
+	// cd out of utils
+	err = os.Chdir("..")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// mkdir lib
+	err = os.Mkdir("lib", 0755)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// cd lib
+	err = os.Chdir("lib")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// mkdir controllers
+	err = os.Mkdir("controllers", 0755)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// cd into controllers
+	err = os.Chdir("controllers")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// mkdir users
+	err = os.Mkdir("users", 0755)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// cd into users
+	err = os.Chdir("users")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// create service file and types file
+	utils.Create_File("controller.ts", generated.File__noAuthController)
+	utils.Create_File("types.ts", generated.File__firebaseAuthTypes)
+
 }

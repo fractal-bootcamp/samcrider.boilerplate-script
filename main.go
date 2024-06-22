@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	vite_boil.Vite_NoAuth()
+	express_boil.Express_NoAuth()
 }
 
 func _main() {

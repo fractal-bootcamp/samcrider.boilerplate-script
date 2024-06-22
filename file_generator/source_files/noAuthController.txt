@@ -1,0 +1,28 @@
+import express from "express";
+import type { UserInputDto, UserOutputDto } from "./types";
+
+const exampleRouter = express.Router();
+
+// you may not need this
+declare global {
+  namespace Express {
+    interface Request {
+      user: {
+        id: string;
+        email: string;
+      };
+    }
+  }
+}
+
+//...
+
+exampleRouter.get("/example", (req, res) => {
+
+  res.status(200).json({message: "I am an example"});
+});
+
+//...
+
+
+export default exampleRouter;
