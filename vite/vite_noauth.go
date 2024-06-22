@@ -174,4 +174,11 @@ func Vite_NoAuth() {
 	utils.Create_File("service.ts", generated.File__noAuthService)
 	utils.Create_File("types.ts", generated.File__firebaseFrontTypes)
 
+	// cd back to project root in preparation for creating the backend
+	err = os.Chdir("../../../../../")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
 }

@@ -13,11 +13,11 @@ import (
 	vite_boil "sam.crider/boilerplate-script/vite"
 )
 
-func main() {
-	express_boil.Express_NoAuth()
-}
+// func main() {
+// 	express_boil.Express_NoAuth()
+// }
 
-func _main() {
+func main() {
 	// get the user's selected stack
 	stack := utils.Select(
 		"Select Your Build Stack:",
@@ -77,6 +77,7 @@ func _main() {
 			express_boil.Express_FirebaseAuth()
 
 			fmt.Println("Success! Boilerplate created.")
+			return
 
 		} else if auth_integration == "Clerk" {
 			// add readme
@@ -89,6 +90,7 @@ func _main() {
 			// express_boil.Express_ClerkAuth()
 
 			fmt.Println("Success! Boilerplate created.")
+			return
 
 		} else if auth_integration == "None" {
 			// add readme
@@ -101,6 +103,7 @@ func _main() {
 			express_boil.Express_NoAuth()
 
 			fmt.Println("Success! Boilerplate created.")
+			return
 		}
 
 		fmt.Println("Failure. Maybe you didn't select an option?")
