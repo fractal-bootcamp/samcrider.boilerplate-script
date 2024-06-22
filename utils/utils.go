@@ -62,6 +62,7 @@ func Create_File(name string, file_content []string) {
 	err = file.Close()
 	if err != nil {
 		fmt.Println(err)
+		defer file.Close()
 		return
 	}
 }
