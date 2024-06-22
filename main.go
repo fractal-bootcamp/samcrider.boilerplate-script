@@ -13,7 +13,7 @@ import (
 
 func main() {
 	// get the user's selected stack
-	stack := utils.Select_Stack(
+	stack := utils.Select(
 		"Select Your Build Stack:",
 		[]string{
 			"Vite + Express",
@@ -26,6 +26,7 @@ func main() {
 		"What's the name of this project?",
 	)
 
+	
 	if stack == "Vite + Express" {
 		// create a directory for the project, 0755 is the permission bits
 		err := os.Mkdir(project_name, 0755)
