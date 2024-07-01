@@ -8,16 +8,19 @@ import (
 
 	generated "sam.crider/boilerplate-script/file_generator/generated_files"
 
+	next_boil "sam.crider/boilerplate-script/next"
+
 	express_boil "sam.crider/boilerplate-script/express"
 	"sam.crider/boilerplate-script/utils"
 	vite_boil "sam.crider/boilerplate-script/vite"
 )
 
-// func main() {
-// 	express_boil.Express_NoAuth()
-// }
-
 func main() {
+	next_boil.Next_NoAuth("test")
+	// express_boil.Express_NoAuth()
+}
+
+func _main() {
 	// get the user's selected stack
 	stack := utils.Select(
 		"Select Your Build Stack:",
@@ -111,9 +114,41 @@ func main() {
 
 	}
 	if stack == "Next.js" {
-		fmt.Println("Coming Soon")
-		fmt.Println("Success! Boilerplate created.")
+		// TODO: make this a switch case
+		if auth_integration == "Firebase" {
+			// add readme
+			utils.Create_File("README.md", generated.File__viteExpressFirebaseReadme)
+
+			// create the app
+			// next_boil.Next_FirebaseAuth(project_name)
+
+			fmt.Println("Success! Boilerplate created.")
+			return
+
+		} else if auth_integration == "Clerk" {
+			// add readme
+			utils.Create_File("README.md", generated.File__viteExpressClerkReadme)
+
+			// create the app
+			// next_boil.Next_ClerkAuth(project_name)
+
+			fmt.Println("Success! Boilerplate created.")
+			return
+
+		} else if auth_integration == "None" {
+			// add readme
+			utils.Create_File("README.md", generated.File__nextNoAuthReadme)
+
+			// create the app
+			next_boil.Next_NoAuth(project_name)
+
+			fmt.Println("Success! Boilerplate created.")
+			return
+		}
+
+		fmt.Println("Failure. Maybe you didn't select an option?")
 		return
+
 	}
 
 	fmt.Println("Failure. Maybe you didn't select an option?")

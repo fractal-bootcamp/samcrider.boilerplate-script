@@ -2,8 +2,8 @@
 
 package generated
 
-var File__viteExpressNoAuthReadme = []string{
-"// Vite + Express App with No Auth",
+var File__nextNoAuthReadme = []string{
+"// Next.js App with No Auth",
 "",
 "## General",
 "- Note that docker is running, it just isn't shown in the terminal",
