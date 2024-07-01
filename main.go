@@ -16,8 +16,7 @@ import (
 )
 
 func main() {
-	next_boil.Next_NoAuth("test")
-	// express_boil.Express_NoAuth()
+	next_boil.Next_ClerkAuth("test")
 }
 
 func _main() {
@@ -127,10 +126,10 @@ func _main() {
 
 		} else if auth_integration == "Clerk" {
 			// add readme
-			utils.Create_File("README.md", generated.File__viteExpressClerkReadme)
+			utils.Create_File("README.md", generated.File__nextClerkReadme)
 
 			// create the app
-			// next_boil.Next_ClerkAuth(project_name)
+			next_boil.Next_ClerkAuth(project_name)
 
 			fmt.Println("Success! Boilerplate created.")
 			return

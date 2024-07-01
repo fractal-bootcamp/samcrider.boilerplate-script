@@ -2,8 +2,8 @@
 
 package generated
 
-var File__nextNoAuthReadme = []string{
-"// Next.js App with No Auth",
+var File__nextClerkReadme = []string{
+"// Next.js App with clerk integration",
 "",
 "## General",
 "- Note that docker is running, it just isn't shown in the terminal",
@@ -13,5 +13,7 @@ var File__nextNoAuthReadme = []string{
 "    3. if that doesn't work, reload the developer window",
 "- Note that a git repo has been initialized in the root directory of your project!",
 "",
-"",
+"## Clerk",
+"- You need to go to the clerk website and create a new project.",
+"- Then add the project's publishable key and secret key to the .env.local file.",
 }
