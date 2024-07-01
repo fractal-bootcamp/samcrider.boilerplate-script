@@ -25,6 +25,26 @@ func Next_ClerkAuth(project_name string) {
 		return
 	}
 
+	// remove readme and replace with clerk readme
+	err = os.Remove("README.md")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	utils.Create_File("README.md", generated.File__nextClerkReadme)
+
+	// install deps
+	cmd_deps := utils.BoundCommand("npm", "install", "@clerk/nextjs")
+
+	if err := cmd_deps.Run(); err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// make .env.local file
+	utils.Create_File(".env.local", generated.File__nextClerkEnvLocal)
+
 	// install dev deps (prisma)
 	cmd_dev_deps := utils.BoundCommand("npm", "install", "--save-dev", "prisma")
 
@@ -100,6 +120,32 @@ func Next_ClerkAuth(project_name string) {
 
 	// cd src directory
 	err = os.Chdir("src")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// create clerk middleware file
+	utils.Create_File("middleware.ts", generated.File__nextClerkMiddleware)
+
+	// cd app directory
+	err = os.Chdir("app")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// remove and replace the layout file
+	err = os.Remove("layout.tsx")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	utils.Create_File("layout.tsx", generated.File__nextClerkLayout)
+
+	// cd out of app
+	err = os.Chdir("..")
 	if err != nil {
 		fmt.Println(err)
 		return

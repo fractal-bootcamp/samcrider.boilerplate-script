@@ -25,6 +25,15 @@ func Next_NoAuth(project_name string) {
 		return
 	}
 
+	// remove readme and replace with clerk readme
+	err = os.Remove("README.md")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	utils.Create_File("README.md", generated.File__nextNoAuthReadme)
+
 	// install dev deps (prisma)
 	cmd_dev_deps := utils.BoundCommand("npm", "install", "--save-dev", "prisma")
 
