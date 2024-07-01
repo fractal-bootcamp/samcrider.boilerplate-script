@@ -15,11 +15,11 @@ import (
 	vite_boil "sam.crider/boilerplate-script/vite"
 )
 
-func main() {
-	next_boil.Next_ClerkAuth("test")
-}
+// func main() {
+// 	next_boil.Next_ClerkAuth("test")
+// }
 
-func _main() {
+func main() {
 	// get the user's selected stack
 	stack := utils.Select(
 		"Select Your Build Stack:",
