@@ -2,12 +2,12 @@ import type { UserOutputDto } from "./types";
 
 export interface UserApi {
   createUser: (
-    email: string; 
+    email: string,
   ) => Promise<any>;
   getSelf: () => Promise<any>;
   updateUser: (
-   email: string;
-   id: string;
+   email: string,
+   id: string,
   ) => Promise<any>;
 }
 
