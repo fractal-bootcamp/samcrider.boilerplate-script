@@ -125,9 +125,6 @@ func main() {
 			return
 
 		} else if auth_integration == "Clerk" {
-			// add readme
-			utils.Create_File("README.md", generated.File__nextClerkReadme)
-
 			// create the app
 			next_boil.Next_ClerkAuth(project_name)
 
@@ -135,9 +132,6 @@ func main() {
 			return
 
 		} else if auth_integration == "None" {
-			// add readme
-			utils.Create_File("README.md", generated.File__nextNoAuthReadme)
-
 			// create the app
 			next_boil.Next_NoAuth(project_name)
 
