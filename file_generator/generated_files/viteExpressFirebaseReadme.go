@@ -11,6 +11,7 @@ var File__viteExpressFirebaseReadme = []string{
 "- If a file is in the gitignore but isn't greyed out:",
 "    1. delete and then retype a letter of the filename in the gitignore",
 "    2. save the gitignore file, now the file should be greyed out",
+"    3. if that doesn't work, reload the developer window",
 "- Note that a git repo has been initialized in the root directory of your project!",
 "",
 "## Frontend",
