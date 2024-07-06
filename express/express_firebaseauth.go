@@ -59,6 +59,13 @@ func Express_FirebaseAuth() {
 	utils.Create_File("docker-compose.yml", generated.File__docker)
 
 	// initialize primsa
+	cmd_docker := utils.BoundCommand("docker", "compose", "up")
+	if err := cmd_docker.Run(); err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// initialize primsa
 	cmd_prisma := utils.BoundCommand("npx", "prisma", "init", "--datasource-provider", "postgreSQL")
 	if err := cmd_prisma.Run(); err != nil {
 		fmt.Println(err)
