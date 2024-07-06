@@ -113,13 +113,6 @@ func Express_FirebaseAuth() {
 		return
 	}
 
-	// docker compose up
-	cmd_dockerUp := utils.BoundCommand("docker", "compose", "up", "-d")
-	if err := cmd_dockerUp.Run(); err != nil {
-		fmt.Println(err)
-		return
-	}
-
 	// run a db migration
 	cmd_migration := utils.BoundCommand("npx", "prisma", "migrate", "dev")
 	if err := cmd_migration.Run(); err != nil {
