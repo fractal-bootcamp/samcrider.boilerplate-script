@@ -53,29 +53,14 @@ func Express_FirebaseAuth(docker_port string) {
 
 	}, "Installing backend packages...")()
 
-	utils.Work_wrapper(func() {
-		// make app.ts
-		utils.Create_File("app.ts", generated.File__firebaseAuthApp)
+	// make app.ts
+	utils.Create_File("app.ts", generated.File__firebaseAuthApp)
 
-		// make firebase service account key file
-		utils.Create_File("serviceAccountKey.json", generated.File__serviceAccountKey)
+	// make firebase service account key file
+	utils.Create_File("serviceAccountKey.json", generated.File__serviceAccountKey)
 
-		// make dockerfile
-		if docker_port == "10009" {
-			utils.Create_File("docker-compose.yml", generated.File__docker)
-		} else {
-			utils.Revise_File("docker-compose.yml", generated.File__docker, docker_port)
-
-		}
-
-		// get docker up
-		cmd_docker := utils.BoundCommand("docker", "compose", "up", "-d")
-		if err := cmd_docker.Run(); err != nil {
-			fmt.Println(err)
-			return
-		}
-
-	}, "Starting Docker container...")()
+	// make dockerfile
+	utils.Revise_File("docker-compose.yml", generated.File__docker, docker_port)
 
 	utils.Work_wrapper(func() {
 		// initialize primsa
@@ -83,6 +68,12 @@ func Express_FirebaseAuth(docker_port string) {
 		if err := cmd_prisma.Run(); err != nil {
 			fmt.Println(err)
 			return
+		}
+
+		// get docker up
+		cmd_docker := utils.BoundCommand("docker", "compose", "up", "-d")
+		if err := cmd_docker.Run(); err != nil {
+			docker_port = utils.Retry_Docker()
 		}
 
 		// replace the .env file
@@ -129,7 +120,7 @@ func Express_FirebaseAuth(docker_port string) {
 			return
 		}
 
-	}, "Setting up Prisma...")()
+	}, "Setting up Prisma and Docker...")()
 
 	// run a db migration
 	cmd_migration := utils.BoundCommand("npx", "prisma", "migrate", "dev")

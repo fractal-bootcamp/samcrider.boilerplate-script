@@ -5,7 +5,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"strconv"
 
 	generated "sam.crider/boilerplate-script/file_generator/generated_files"
 
@@ -16,11 +15,11 @@ import (
 	vite_boil "sam.crider/boilerplate-script/vite"
 )
 
-func main() {
-	next_boil.Next_NoAuth("testproddy", "10059")
+func _main() {
+
 }
 
-func _main() {
+func main() {
 
 	// get the user's selected stack
 	stack := utils.Select(
@@ -46,25 +45,8 @@ func _main() {
 		},
 	)
 
-	// get users docker port preference
-	docker_port := utils.Input(
-		"What docker port should the backend be on? (default: 10009)",
-	)
-	if docker_port == "" {
-		docker_port = "10009"
-	} else {
-		// make sure the port is a number
-		docker_port_int, err := strconv.Atoi(docker_port)
-		if err != nil {
-			fmt.Println("Invalid docker port number")
-			return
-		}
-		// make sure the port is between 1 and 65535
-		if docker_port_int < 1 || docker_port_int > 65535 {
-			fmt.Println("Docker port number must be between 1 and 65535")
-			return
-		}
-	}
+	// get the docker port
+	docker_port := utils.GetDockerPort()
 
 	// TODO: make this a switch case
 	if stack == "Vite + Express" {
