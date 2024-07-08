@@ -5,8 +5,10 @@ import (
 	"os"
 	"os/exec"
 	"strings"
+	"time"
 
 	"github.com/AlecAivazis/survey/v2"
+	"github.com/briandowns/spinner"
 )
 
 func BoundCommand(name string, arg ...string) *exec.Cmd {
@@ -97,4 +99,19 @@ func Revise_File(name string, file_content []string, new string) {
 			return
 		}
 	}
+}
+
+func Work_wrapper(wrapped func(), suffix string) func() {
+	return func() {
+		s := spinner.New(spinner.CharSets[9], 100*time.Millisecond)
+		s.Color("magenta")
+		s.Suffix = " " + suffix
+		s.Start()
+
+		// call internal function
+		wrapped()
+
+		s.Stop()
+	}
+
 }
