@@ -17,10 +17,11 @@ import (
 )
 
 func main() {
-	express_boil.Express_FirebaseAuth("10050")
+	vite_boil.Vite_FirebaseAuth()
 }
 
 func _main() {
+
 	// get the user's selected stack
 	stack := utils.Select(
 		"Select Your Build Stack:",
@@ -67,29 +68,28 @@ func _main() {
 
 	// TODO: make this a switch case
 	if stack == "Vite + Express" {
-		// create a directory for the project, 0755 is the permission bits
-		fmt.Println("creating project directory")
-		err := os.Mkdir(project_name, 0755)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+		utils.Work_wrapper(func() {
+			// create a directory for the project, 0755 is the permission bits
+			err := os.Mkdir(project_name, 0755)
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
 
-		// cd into the new project
-		err = os.Chdir(project_name)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+			// cd into the new project
+			err = os.Chdir(project_name)
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
 
-		// initialize git for the project
-		cmd := utils.BoundCommand("git", "init")
-		if err := cmd.Run(); err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		fmt.Println("installing auth", auth_integration)
+			// initialize git for the project
+			cmd := utils.BoundCommand("git", "init")
+			if err := cmd.Run(); err != nil {
+				fmt.Println(err)
+				return
+			}
+		}, "Initializing project...")()
 
 		// TODO: make this a switch case
 		if auth_integration == "Firebase" {

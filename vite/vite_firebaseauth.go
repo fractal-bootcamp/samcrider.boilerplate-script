@@ -10,57 +10,69 @@ import (
 )
 
 func Vite_FirebaseAuth() {
-	// make vite app
-	cmd := utils.BoundCommand("npm", "create", "vite@latest", "frontend")
 
-	if err := cmd.Run(); err != nil {
-		fmt.Println(err)
-		return
-	}
+	// create vite app
+	utils.Work_wrapper(func() {
+		cmd := utils.BoundCommand("npm", "create", "vite@latest", "frontend")
 
-	// cd into frontend
-	err := os.Chdir("frontend")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		if err := cmd.Run(); err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// npm install all the vite packages
-	cmd = utils.BoundCommand("npm", "install")
+		// cd into frontend
+		err := os.Chdir("frontend")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	if err := cmd.Run(); err != nil {
-		fmt.Println(err)
-		return
-	}
+	}, "Creating frontend...")()
 
-	// import deps
-	cmd = utils.BoundCommand("npm", "install", "axios", "firebase")
+	utils.Work_wrapper(func() {
+		// npm install all the vite packages
+		cmd := utils.BoundCommand("npm", "install")
 
-	if err := cmd.Run(); err != nil {
-		fmt.Println(err)
-		return
-	}
+		if err := cmd.Run(); err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// create .env file
-	utils.Create_File(".env", generated.File__firebaseFrontEnv)
+	}, "Installing frontend packages...")()
 
-	// replace the gitignore file
-	err = os.Remove(".gitignore")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	utils.Work_wrapper(func() {
+		// import deps
+		cmd := utils.BoundCommand("npm", "install", "axios", "firebase")
 
-	utils.Create_File(".gitignore", generated.File__firebaseFrontGitignore)
+		if err := cmd.Run(); err != nil {
+			fmt.Println(err)
+			return
+		}
+	}, "Installing Firebase and Axios packages...")()
 
-	// replace the vite.config file
-	err = os.Remove("vite.config.ts")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	utils.Work_wrapper(func() {
+		// create .env file
+		utils.Create_File(".env", generated.File__firebaseFrontEnv)
 
-	utils.Create_File("vite.config.ts", generated.File__firebaseFrontViteConfig)
+		// replace the gitignore file
+		err := os.Remove(".gitignore")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		utils.Create_File(".gitignore", generated.File__firebaseFrontGitignore)
+
+		// replace the vite.config file
+		err = os.Remove("vite.config.ts")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		utils.Create_File("vite.config.ts", generated.File__firebaseFrontViteConfig)
+
+	}, "Restructuring Vite boilerplate...")()
 
 	// ask if user wants tailwind
 	tailwind_check := utils.Select(
@@ -72,122 +84,127 @@ func Vite_FirebaseAuth() {
 	)
 
 	if tailwind_check == "Yes" {
-		// install tailwind
-		cmd := utils.BoundCommand("npm", "install", "-D", "tailwindcss", "postcss", "autoprefixer")
+		utils.Work_wrapper(func() {
+			// install tailwind
+			cmd := utils.BoundCommand("npm", "install", "-D", "tailwindcss", "postcss", "autoprefixer")
 
-		if err := cmd.Run(); err != nil {
-			fmt.Println(err)
-			return
-		}
+			if err := cmd.Run(); err != nil {
+				fmt.Println(err)
+				return
+			}
 
-		// initialize tailwind
-		cmd = utils.BoundCommand("npx", "tailwindcss", "init", "-p")
+			// initialize tailwind
+			cmd = utils.BoundCommand("npx", "tailwindcss", "init", "-p")
 
-		if err := cmd.Run(); err != nil {
-			fmt.Println(err)
-			return
-		}
+			if err := cmd.Run(); err != nil {
+				fmt.Println(err)
+				return
+			}
 
-		// replace tailwind config file
-		err = os.Remove("tailwind.config.js")
+			// replace tailwind config file
+			err := os.Remove("tailwind.config.js")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
+			utils.Create_File("tailwind.config.js", generated.File__firebaseFrontTailwindConfig)
+
+			// replace index.css file
+			// cd into src
+			err = os.Chdir("src")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
+			err = os.Remove("index.css")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
+			utils.Create_File("index.css", generated.File__firebaseFrontIndexCss)
+
+			// cd out of src
+			err = os.Chdir("..")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
+		}, "Adding Tailwind...")()
+
+	}
+
+	utils.Work_wrapper(func() {
+		// mkdir lib
+		err := os.Mkdir("lib", 0755)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 
-		utils.Create_File("tailwind.config.js", generated.File__firebaseFrontTailwindConfig)
-
-		// replace index.css file
-		// cd into src
-		err := os.Chdir("src")
+		// cd lib
+		err = os.Chdir("lib")
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 
-		err = os.Remove("index.css")
+		// mkdir's firebase and services
+		err = os.Mkdir("firebase", 0755)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 
-		utils.Create_File("index.css", generated.File__firebaseFrontIndexCss)
-
-		// cd out of src
-		err = os.Chdir("..")
+		err = os.Mkdir("services", 0755)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 
-	}
+		// cd into firebase
+		err = os.Chdir("firebase")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// mkdir lib
-	err = os.Mkdir("lib", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		// created firebase config
+		utils.Create_File("config.ts", generated.File__firebaseFrontConfig)
 
-	// cd lib
-	err = os.Chdir("lib")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		// cd into services
+		err = os.Chdir("../services")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// mkdir's firebase and services
-	err = os.Mkdir("firebase", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		// mkdir auth
+		err = os.Mkdir("auth", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	err = os.Mkdir("services", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		// cd into auth
+		err = os.Chdir("auth")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// cd into firebase
-	err = os.Chdir("firebase")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		// create service file and types file
+		utils.Create_File("service.ts", generated.File__firebaseFrontService)
+		utils.Create_File("types.ts", generated.File__firebaseFrontTypes)
 
-	// created firebase config
-	utils.Create_File("config.ts", generated.File__firebaseFrontConfig)
-
-	// cd into services
-	err = os.Chdir("../services")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// mkdir auth
-	err = os.Mkdir("auth", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// cd into auth
-	err = os.Chdir("auth")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// create service file and types file
-	utils.Create_File("service.ts", generated.File__firebaseFrontService)
-	utils.Create_File("types.ts", generated.File__firebaseFrontTypes)
-
-	// cd back to project root in preparation for creating the backend
-	err = os.Chdir("../../../../")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		// cd back to project root in preparation for creating the backend
+		err = os.Chdir("../../../../")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+	}, "Creating Library files...")()
 }
