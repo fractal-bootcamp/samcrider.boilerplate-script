@@ -58,8 +58,8 @@ func Express_FirebaseAuth() {
 	// make dockerfile
 	utils.Create_File("docker-compose.yml", generated.File__docker)
 
-	// initialize primsa
-	cmd_docker := utils.BoundCommand("docker", "compose", "up")
+	// get docker up
+	cmd_docker := utils.BoundCommand("docker", "compose", "up", "-d")
 	if err := cmd_docker.Run(); err != nil {
 		fmt.Println(err)
 		return

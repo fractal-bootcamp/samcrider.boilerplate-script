@@ -47,13 +47,12 @@ func main() {
 	// TODO: make this a switch case
 	if stack == "Vite + Express" {
 		// create a directory for the project, 0755 is the permission bits
+		fmt.Println("creating project directory")
 		err := os.Mkdir(project_name, 0755)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
-
-		fmt.Println("creating project directory")
 
 		// cd into the new project
 		err = os.Chdir(project_name)
@@ -82,7 +81,7 @@ func main() {
 			// create the backend
 			express_boil.Express_FirebaseAuth()
 
-			fmt.Println("Success! Boilerplate created.")
+			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return
 
 		} else if auth_integration == "Clerk" {
@@ -95,7 +94,7 @@ func main() {
 			// create the backend
 			// express_boil.Express_ClerkAuth()
 
-			fmt.Println("Success! Boilerplate created.")
+			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return
 
 		} else if auth_integration == "None" {
@@ -108,7 +107,7 @@ func main() {
 			// create the backend
 			express_boil.Express_NoAuth()
 
-			fmt.Println("Success! Boilerplate created.")
+			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return
 		}
 
@@ -119,27 +118,24 @@ func main() {
 	if stack == "Next.js" {
 		// TODO: make this a switch case
 		if auth_integration == "Firebase" {
-			// add readme
-			utils.Create_File("README.md", generated.File__viteExpressFirebaseReadme)
-
 			// create the app
 			// next_boil.Next_FirebaseAuth(project_name)
 
-			fmt.Println("Success! Boilerplate created.")
+			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return
 
 		} else if auth_integration == "Clerk" {
 			// create the app
 			next_boil.Next_ClerkAuth(project_name)
 
-			fmt.Println("Success! Boilerplate created.")
+			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return
 
 		} else if auth_integration == "None" {
 			// create the app
 			next_boil.Next_NoAuth(project_name)
 
-			fmt.Println("Success! Boilerplate created.")
+			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return
 		}
 

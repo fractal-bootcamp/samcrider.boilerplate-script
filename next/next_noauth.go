@@ -25,7 +25,7 @@ func Next_NoAuth(project_name string) {
 		return
 	}
 
-	// remove readme and replace with clerk readme
+	// remove readme and replace with no auth readme
 	err = os.Remove("README.md")
 	if err != nil {
 		fmt.Println(err)
