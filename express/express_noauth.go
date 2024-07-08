@@ -8,7 +8,7 @@ import (
 	"sam.crider/boilerplate-script/utils"
 )
 
-func Express_NoAuth() {
+func Express_NoAuth(docker_port string) {
 	// mkdir for backend, 0755 is the permission bits
 	err := os.Mkdir("backend", 0755)
 	if err != nil {
@@ -53,7 +53,19 @@ func Express_NoAuth() {
 	utils.Create_File("app.ts", generated.File__noAuthApp)
 
 	// make dockerfile
-	utils.Create_File("docker-compose.yml", generated.File__docker)
+	if docker_port == "10009" {
+		utils.Create_File("docker-compose.yml", generated.File__docker)
+	} else {
+		utils.Revise_File("docker-compose.yml", generated.File__docker, docker_port)
+
+	}
+
+	// get docker up
+	cmd_docker := utils.BoundCommand("docker", "compose", "up", "-d")
+	if err := cmd_docker.Run(); err != nil {
+		fmt.Println(err)
+		return
+	}
 
 	// initialize primsa
 	cmd_prisma := utils.BoundCommand("npx", "prisma", "init", "--datasource-provider", "postgreSQL")
@@ -68,8 +80,11 @@ func Express_NoAuth() {
 		fmt.Println(err)
 		return
 	}
-
-	utils.Create_File(".env", generated.File__firebaseEnv)
+	if docker_port == "10009" {
+		utils.Create_File(".env", generated.File__firebaseEnv)
+	} else {
+		utils.Revise_File(".env", generated.File__firebaseEnv, docker_port)
+	}
 
 	// cd into prisma
 	err = os.Chdir("prisma")
@@ -90,13 +105,6 @@ func Express_NoAuth() {
 	// cd out of prisma
 	err = os.Chdir("..")
 	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// docker compose up
-	cmd_dockerUp := utils.BoundCommand("docker", "compose", "up", "-d")
-	if err := cmd_dockerUp.Run(); err != nil {
 		fmt.Println(err)
 		return
 	}

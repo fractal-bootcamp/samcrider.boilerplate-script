@@ -5,6 +5,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strconv"
 
 	generated "sam.crider/boilerplate-script/file_generator/generated_files"
 
@@ -15,11 +16,11 @@ import (
 	vite_boil "sam.crider/boilerplate-script/vite"
 )
 
-// func main() {
-// 	next_boil.Next_ClerkAuth("test")
-// }
-
 func main() {
+	express_boil.Express_FirebaseAuth("10050")
+}
+
+func _main() {
 	// get the user's selected stack
 	stack := utils.Select(
 		"Select Your Build Stack:",
@@ -30,7 +31,7 @@ func main() {
 	)
 
 	// get the user's project name
-	project_name := utils.Name_Project(
+	project_name := utils.Input(
 		"What's the name of this project?",
 	)
 
@@ -43,6 +44,26 @@ func main() {
 			"None",
 		},
 	)
+
+	// get users docker port preference
+	docker_port := utils.Input(
+		"What docker port should the backend be on? (default: 10009)",
+	)
+	if docker_port == "" {
+		docker_port = "10009"
+	} else {
+		// make sure the port is a number
+		docker_port_int, err := strconv.Atoi(docker_port)
+		if err != nil {
+			fmt.Println("Invalid docker port number")
+			return
+		}
+		// make sure the port is between 1 and 65535
+		if docker_port_int < 1 || docker_port_int > 65535 {
+			fmt.Println("Docker port number must be between 1 and 65535")
+			return
+		}
+	}
 
 	// TODO: make this a switch case
 	if stack == "Vite + Express" {
@@ -68,7 +89,7 @@ func main() {
 			return
 		}
 
-		fmt.Print("installing auth", auth_integration)
+		fmt.Println("installing auth", auth_integration)
 
 		// TODO: make this a switch case
 		if auth_integration == "Firebase" {
@@ -79,7 +100,7 @@ func main() {
 			vite_boil.Vite_FirebaseAuth()
 
 			// create the backend
-			express_boil.Express_FirebaseAuth()
+			express_boil.Express_FirebaseAuth(docker_port)
 
 			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return
@@ -92,7 +113,7 @@ func main() {
 			// vite_boil.Vite_ClerkAuth()
 
 			// create the backend
-			// express_boil.Express_ClerkAuth()
+			// express_boil.Express_ClerkAuth(docker_port)
 
 			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return
@@ -105,7 +126,7 @@ func main() {
 			vite_boil.Vite_NoAuth()
 
 			// create the backend
-			express_boil.Express_NoAuth()
+			express_boil.Express_NoAuth(docker_port)
 
 			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return
@@ -119,21 +140,21 @@ func main() {
 		// TODO: make this a switch case
 		if auth_integration == "Firebase" {
 			// create the app
-			// next_boil.Next_FirebaseAuth(project_name)
+			// next_boil.Next_FirebaseAuth(project_name, docker_port_int)
 
 			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return
 
 		} else if auth_integration == "Clerk" {
 			// create the app
-			next_boil.Next_ClerkAuth(project_name)
+			next_boil.Next_ClerkAuth(project_name, docker_port)
 
 			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return
 
 		} else if auth_integration == "None" {
 			// create the app
-			next_boil.Next_NoAuth(project_name)
+			next_boil.Next_NoAuth(project_name, docker_port)
 
 			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return
