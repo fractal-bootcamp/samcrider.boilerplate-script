@@ -45,6 +45,13 @@ func Next_NoAuth(project_name string) {
 	// make dockerfile
 	utils.Create_File("docker-compose.yml", generated.File__docker)
 
+	// get docker up
+	cmd_docker := utils.BoundCommand("docker", "compose", "up", "-d")
+	if err := cmd_docker.Run(); err != nil {
+		fmt.Println(err)
+		return
+	}
+
 	// initialize prisma
 	cmd_prisma := utils.BoundCommand("npx", "prisma", "init", "--datasource-provider", "postgreSQL")
 	if err := cmd_prisma.Run(); err != nil {
@@ -89,13 +96,6 @@ func Next_NoAuth(project_name string) {
 	// cd out of prisma
 	err = os.Chdir("..")
 	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// docker compose up
-	cmd_dockerUp := utils.BoundCommand("docker", "compose", "up", "-d")
-	if err := cmd_dockerUp.Run(); err != nil {
 		fmt.Println(err)
 		return
 	}
