@@ -34,28 +34,32 @@ func Next_NoAuth(project_name string, docker_port string) {
 
 	utils.Create_File("README.md", generated.File__nextNoAuthReadme)
 
-	// install dev deps (prisma)
-	cmd_dev_deps := utils.BoundCommand("npm", "install", "--save-dev", "prisma")
+	utils.Work_wrapper(func() {
+		// install dev deps (prisma)
+		cmd_dev_deps := utils.BoundCommand("npm", "install", "--save-dev", "prisma")
 
-	if err := cmd_dev_deps.Run(); err != nil {
-		fmt.Println(err)
-		return
-	}
+		if err := cmd_dev_deps.Run(); err != nil {
+			fmt.Println(err)
+			return
+		}
+	}, "Installing dev dependencies...")()
 
-	// make dockerfile
-	if docker_port == "10009" {
-		utils.Create_File("docker-compose.yml", generated.File__docker)
-	} else {
-		utils.Revise_File("docker-compose.yml", generated.File__docker, docker_port)
+	utils.Work_wrapper(func() {
+		// make dockerfile
+		if docker_port == "10009" {
+			utils.Create_File("docker-compose.yml", generated.File__docker)
+		} else {
+			utils.Revise_File("docker-compose.yml", generated.File__docker, docker_port)
 
-	}
+		}
 
-	// get docker up
-	cmd_docker := utils.BoundCommand("docker", "compose", "up", "-d")
-	if err := cmd_docker.Run(); err != nil {
-		fmt.Println(err)
-		return
-	}
+		// get docker up
+		cmd_docker := utils.BoundCommand("docker", "compose", "up", "-d")
+		if err := cmd_docker.Run(); err != nil {
+			fmt.Println(err)
+			return
+		}
+	}, "Starting Docker container...")()
 
 	// initialize prisma
 	cmd_prisma := utils.BoundCommand("npx", "prisma", "init", "--datasource-provider", "postgreSQL")
@@ -115,122 +119,125 @@ func Next_NoAuth(project_name string, docker_port string) {
 		return
 	}
 
-	// cd src directory
-	err = os.Chdir("src")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	utils.Work_wrapper(func() {
+		// cd src directory
+		err = os.Chdir("src")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// make utils folder, cd into it
-	err = os.Mkdir("utils", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		// make utils folder, cd into it
+		err = os.Mkdir("utils", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	err = os.Chdir("utils")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		err = os.Chdir("utils")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// create client.ts file
-	utils.Create_File("client.ts", generated.File__client)
+		// create client.ts file
+		utils.Create_File("client.ts", generated.File__client)
 
-	// cd out of utils
-	err = os.Chdir("..")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		// cd out of utils
+		err = os.Chdir("..")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// mkdir components
-	err = os.Mkdir("components", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		// mkdir components
+		err = os.Mkdir("components", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// cd into components
-	err = os.Chdir("components")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		// cd into components
+		err = os.Chdir("components")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// mkdir pages
-	err = os.Mkdir("pages", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		// mkdir pages
+		err = os.Mkdir("pages", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// mkdir compound
-	err = os.Mkdir("compound", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		// mkdir compound
+		err = os.Mkdir("compound", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// mkdir base
-	err = os.Mkdir("base", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		// mkdir base
+		err = os.Mkdir("base", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// cd out of components
-	err = os.Chdir("..")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		// cd out of components
+		err = os.Chdir("..")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// mkdir lib
-	err = os.Mkdir("lib", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		// mkdir lib
+		err = os.Mkdir("lib", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// cd lib
-	err = os.Chdir("lib")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		// cd lib
+		err = os.Chdir("lib")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// mkdir controllers
-	err = os.Mkdir("controllers", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		// mkdir controllers
+		err = os.Mkdir("controllers", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// cd into controllers
-	err = os.Chdir("controllers")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		// cd into controllers
+		err = os.Chdir("controllers")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// mkdir users
-	err = os.Mkdir("users", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		// mkdir users
+		err = os.Mkdir("users", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// cd into users
-	err = os.Chdir("users")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+		// cd into users
+		err = os.Chdir("users")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	// create controller and types files
-	utils.Create_File("controller.ts", generated.File__nextNoAuthController)
-	utils.Create_File("types.ts", generated.File__firebaseAuthTypes)
+		// create controller and types files
+		utils.Create_File("controller.ts", generated.File__nextNoAuthController)
+		utils.Create_File("types.ts", generated.File__firebaseAuthTypes)
+
+	}, "Creating Utils, Components, and Library folders...")()
 
 }

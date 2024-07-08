@@ -17,7 +17,7 @@ import (
 )
 
 func main() {
-	next_boil.Next_ClerkAuth("testproddy", "10059")
+	next_boil.Next_NoAuth("testproddy", "10059")
 }
 
 func _main() {
