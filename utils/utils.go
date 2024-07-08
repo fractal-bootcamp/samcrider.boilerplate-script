@@ -1,9 +1,12 @@
 package utils
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 	"os/exec"
+	"strconv"
+	"strings"
 
 	"github.com/AlecAivazis/survey/v2"
 )
@@ -67,4 +70,51 @@ func Create_File(name string, file_content []string) {
 			return
 		}
 	}
+}
+
+func Create_Dynamic_Dockerfile(name string, file_content []string, port int) {
+	// open the docker file as read only
+	source_file, err := os.OpenFile("./file_generator/source_files/docker.txt", os.O_RDONLY, os.ModePerm)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// ensure the file is closed once the function finishes execution
+	defer CloseFile(source_file)
+
+	// initialize the file scanner
+	file_scanner := bufio.NewScanner(source_file)
+
+	// create and open a new docker file
+	docker_file, err := os.Create(name)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// ensure the file is closed once the function finishes execution
+	defer CloseFile(docker_file)
+
+	// read each line of the current file
+	for file_scanner.Scan() {
+
+		// get the current line
+		line := file_scanner.Text()
+
+		// if line contains the word "10009", replace it with the user's input
+		line = strings.Replace(line, "10009", strconv.Itoa(port), -1)
+
+		// write the current line into the file
+		_, err := fmt.Fprintln(docker_file, line)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+	}
+	if err := file_scanner.Err(); err != nil {
+		fmt.Println(err)
+		return
+	}
+
 }

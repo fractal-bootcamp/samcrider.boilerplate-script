@@ -5,6 +5,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strconv"
 
 	generated "sam.crider/boilerplate-script/file_generator/generated_files"
 
@@ -48,6 +49,21 @@ func main() {
 	docker_port := utils.Input(
 		"What docker port should the backend be on? (default: 10009)",
 	)
+	if docker_port == "" {
+		docker_port = "10009"
+	} else {
+		// make sure the port is a number
+		docker_port_int, err := strconv.Atoi(docker_port)
+		if err != nil {
+			fmt.Println("Invalid docker port number")
+			return
+		}
+		// make sure the port is between 1 and 65535
+		if docker_port_int < 1 || docker_port_int > 65535 {
+			fmt.Println("Docker port number must be between 1 and 65535")
+			return
+		}
+	}
 
 	// TODO: make this a switch case
 	if stack == "Vite + Express" {
@@ -124,7 +140,7 @@ func main() {
 		// TODO: make this a switch case
 		if auth_integration == "Firebase" {
 			// create the app
-			// next_boil.Next_FirebaseAuth(project_name, docker_port)
+			// next_boil.Next_FirebaseAuth(project_name, docker_port_int)
 
 			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return

@@ -8,7 +8,7 @@ import (
 	"sam.crider/boilerplate-script/utils"
 )
 
-func Express_FirebaseAuth() {
+func Express_FirebaseAuth(docker_port int) {
 	// mkdir for backend, 0755 is the permission bits
 	err := os.Mkdir("backend", 0755)
 	if err != nil {
@@ -56,7 +56,11 @@ func Express_FirebaseAuth() {
 	utils.Create_File("serviceAccountKey.json", generated.File__serviceAccountKey)
 
 	// make dockerfile
-	utils.Create_File("docker-compose.yml", generated.File__docker)
+	if docker_port == 10009 {
+		utils.Create_File("docker-compose.yml", generated.File__docker)
+	} else {
+		utils.Create_Dynamic_Dockerfile("docker-compose.yml", docker_port)
+	}
 
 	// get docker up
 	cmd_docker := utils.BoundCommand("docker", "compose", "up", "-d")
