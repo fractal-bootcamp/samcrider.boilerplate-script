@@ -8,16 +8,14 @@ import (
 	"github.com/AlecAivazis/survey/v2"
 )
 
-
-func BoundCommand(name string, arg ...string) (*exec.Cmd) {
+func BoundCommand(name string, arg ...string) *exec.Cmd {
 	command := exec.Command(name, arg...)
 
 	// bind command to terminal
 	command.Stdin = os.Stdin
 	command.Stdout = os.Stdout
 	command.Stderr = os.Stderr
-	
-	
+
 	return command
 }
 
@@ -32,7 +30,7 @@ func Select(label string, opts []string) string {
 	return res
 }
 
-func Name_Project(label string) string {
+func Input(label string) string {
 	res := ""
 	prompt := &survey.Input{
 		Message: label,

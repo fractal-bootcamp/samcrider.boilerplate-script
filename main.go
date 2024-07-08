@@ -30,7 +30,7 @@ func main() {
 	)
 
 	// get the user's project name
-	project_name := utils.Name_Project(
+	project_name := utils.Input(
 		"What's the name of this project?",
 	)
 
@@ -42,6 +42,11 @@ func main() {
 			"Clerk",
 			"None",
 		},
+	)
+
+	// get users docker port preference
+	docker_port := utils.Input(
+		"What docker port should the backend be on? (default: 10009)",
 	)
 
 	// TODO: make this a switch case
@@ -68,7 +73,7 @@ func main() {
 			return
 		}
 
-		fmt.Print("installing auth", auth_integration)
+		fmt.Println("installing auth", auth_integration)
 
 		// TODO: make this a switch case
 		if auth_integration == "Firebase" {
@@ -79,7 +84,7 @@ func main() {
 			vite_boil.Vite_FirebaseAuth()
 
 			// create the backend
-			express_boil.Express_FirebaseAuth()
+			express_boil.Express_FirebaseAuth(docker_port)
 
 			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return
@@ -92,7 +97,7 @@ func main() {
 			// vite_boil.Vite_ClerkAuth()
 
 			// create the backend
-			// express_boil.Express_ClerkAuth()
+			// express_boil.Express_ClerkAuth(docker_port)
 
 			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return
@@ -105,7 +110,7 @@ func main() {
 			vite_boil.Vite_NoAuth()
 
 			// create the backend
-			express_boil.Express_NoAuth()
+			express_boil.Express_NoAuth(docker_port)
 
 			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return
@@ -119,21 +124,21 @@ func main() {
 		// TODO: make this a switch case
 		if auth_integration == "Firebase" {
 			// create the app
-			// next_boil.Next_FirebaseAuth(project_name)
+			// next_boil.Next_FirebaseAuth(project_name, docker_port)
 
 			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return
 
 		} else if auth_integration == "Clerk" {
 			// create the app
-			next_boil.Next_ClerkAuth(project_name)
+			next_boil.Next_ClerkAuth(project_name, docker_port)
 
 			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return
 
 		} else if auth_integration == "None" {
 			// create the app
-			next_boil.Next_NoAuth(project_name)
+			next_boil.Next_NoAuth(project_name, docker_port)
 
 			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return
