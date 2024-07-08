@@ -59,7 +59,8 @@ func Express_FirebaseAuth(docker_port string) {
 	if docker_port == "10009" {
 		utils.Create_File("docker-compose.yml", generated.File__docker)
 	} else {
-		utils.Create_Dynamic_Port_File("docker-compose.yml", "./file_generator/source_files/docker.txt", docker_port)
+		utils.Revise_File("docker-compose.yml", generated.File__docker, docker_port)
+
 	}
 
 	// get docker up
@@ -82,11 +83,10 @@ func Express_FirebaseAuth(docker_port string) {
 		fmt.Println(err)
 		return
 	}
-
 	if docker_port == "10009" {
 		utils.Create_File(".env", generated.File__firebaseEnv)
 	} else {
-		utils.Create_Dynamic_Port_File(".env", "./file_generator/source_files/firebaseEnv.txt", docker_port)
+		utils.Revise_File(".env", generated.File__firebaseEnv, docker_port)
 	}
 
 	// replace the gitignore file
