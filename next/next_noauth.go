@@ -9,7 +9,7 @@ import (
 	"sam.crider/boilerplate-script/utils"
 )
 
-func Next_NoAuth(project_name string) {
+func Next_NoAuth(project_name string, docker_port string) {
 	// create next app
 	cmd := utils.BoundCommand("npx", "create-next-app", project_name, "--typescript")
 
@@ -43,7 +43,11 @@ func Next_NoAuth(project_name string) {
 	}
 
 	// make dockerfile
-	utils.Create_File("docker-compose.yml", generated.File__docker)
+	if docker_port == "10009" {
+		utils.Create_File("docker-compose.yml", generated.File__docker)
+	} else {
+		utils.Create_Dynamic_Port_File("docker-compose.yml", "./file_generator/source_files/docker.txt", docker_port)
+	}
 
 	// get docker up
 	cmd_docker := utils.BoundCommand("docker", "compose", "up", "-d")
@@ -66,7 +70,11 @@ func Next_NoAuth(project_name string) {
 		return
 	}
 
-	utils.Create_File(".env", generated.File__firebaseEnv)
+	if docker_port == "10009" {
+		utils.Create_File(".env", generated.File__firebaseEnv)
+	} else {
+		utils.Create_Dynamic_Port_File(".env", "./file_generator/source_files/firebaseEnv.txt", docker_port)
+	}
 
 	// replace the gitignore file
 	err = os.Remove(".gitignore")

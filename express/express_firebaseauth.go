@@ -8,7 +8,7 @@ import (
 	"sam.crider/boilerplate-script/utils"
 )
 
-func Express_FirebaseAuth(docker_port int) {
+func Express_FirebaseAuth(docker_port string) {
 	// mkdir for backend, 0755 is the permission bits
 	err := os.Mkdir("backend", 0755)
 	if err != nil {
@@ -56,10 +56,10 @@ func Express_FirebaseAuth(docker_port int) {
 	utils.Create_File("serviceAccountKey.json", generated.File__serviceAccountKey)
 
 	// make dockerfile
-	if docker_port == 10009 {
+	if docker_port == "10009" {
 		utils.Create_File("docker-compose.yml", generated.File__docker)
 	} else {
-		utils.Create_Dynamic_Dockerfile("docker-compose.yml", docker_port)
+		utils.Create_Dynamic_Port_File("docker-compose.yml", "./file_generator/source_files/docker.txt", docker_port)
 	}
 
 	// get docker up
@@ -83,7 +83,11 @@ func Express_FirebaseAuth(docker_port int) {
 		return
 	}
 
-	utils.Create_File(".env", generated.File__firebaseEnv)
+	if docker_port == "10009" {
+		utils.Create_File(".env", generated.File__firebaseEnv)
+	} else {
+		utils.Create_Dynamic_Port_File(".env", "./file_generator/source_files/firebaseEnv.txt", docker_port)
+	}
 
 	// replace the gitignore file
 	err = os.Remove(".gitignore")
