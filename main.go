@@ -118,9 +118,6 @@ func main() {
 	if stack == "Next.js" {
 		// TODO: make this a switch case
 		if auth_integration == "Firebase" {
-			// add readme
-			utils.Create_File("README.md", generated.File__viteExpressFirebaseReadme)
-
 			// create the app
 			// next_boil.Next_FirebaseAuth(project_name)
 
@@ -128,8 +125,6 @@ func main() {
 			return
 
 		} else if auth_integration == "Clerk" {
-			// add readme
-			utils.Create_File("README.md", generated.File__nextClerkReadme)
 			// create the app
 			next_boil.Next_ClerkAuth(project_name)
 
@@ -137,8 +132,6 @@ func main() {
 			return
 
 		} else if auth_integration == "None" {
-			// add readme
-			utils.Create_File("README.md", generated.File__nextNoAuthReadme)
 			// create the app
 			next_boil.Next_NoAuth(project_name)
 
