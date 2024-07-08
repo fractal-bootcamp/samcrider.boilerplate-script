@@ -53,6 +53,8 @@ func main() {
 			return
 		}
 
+		fmt.Println("creating project directory")
+
 		// cd into the new project
 		err = os.Chdir(project_name)
 		if err != nil {
@@ -66,6 +68,8 @@ func main() {
 			fmt.Println(err)
 			return
 		}
+
+		fmt.Print("installing auth", auth_integration)
 
 		// TODO: make this a switch case
 		if auth_integration == "Firebase" {
