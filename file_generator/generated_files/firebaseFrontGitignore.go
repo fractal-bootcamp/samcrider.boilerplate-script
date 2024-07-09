@@ -15,6 +15,7 @@ var File__firebaseFrontGitignore = []string{
 "node_modules",
 "dist",
 "dist-ssr",
+"",
 "*.local",
 "",
 "# Editor directories and files",
