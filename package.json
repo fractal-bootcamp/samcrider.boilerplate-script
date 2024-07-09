@@ -1,5 +1,5 @@
 {
-  "name": "magic",
+  "name": "chicks",
   "version": "0.1.0",
   "description": "An opensource (hopefully) application boilerplate script written in Golang.",
   "main": "index.js",
@@ -22,7 +22,7 @@
   "postinstall": "go-npm install",
   "preuninstall": "go-npm uninstall",
   "goBinary": {
-    "name": "magic",
+    "name": "chicks",
     "path": "./bin",
     "url": "https://github.com/SamuelRCrider/boilerplate-script/releases/download/v{{version}}/boilerplate-script_{{version}}_{{platform}}_{{arch}}.tar.gz"
   }
