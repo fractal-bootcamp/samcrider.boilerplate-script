@@ -1,0 +1,29 @@
+{
+  "name": "magic",
+  "version": "0.1.1",
+  "description": "An opensource (hopefully) application boilerplate script written in Golang.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fractal-bootcamp/samcrider.boilerplate-script.git"
+  },
+  "author": "Samuel R. Crider",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fractal-bootcamp/samcrider.boilerplate-script/issues"
+  },
+  "homepage": "https://github.com/fractal-bootcamp/samcrider.boilerplate-script#readme",
+  "dependencies": {
+    "go-npm": "^0.1.9"
+  },
+  "postinstall": "go-npm install",
+  "preuninstall": "go-npm uninstall",
+  "goBinary": {
+    "name": "magic",
+    "path": "./bin",
+    "url": "https://github.com/fractal-bootcamp/samcrider.boilerplate-script/releases/download/v{{version}}/samcrider.boilerplate-script_{{version}}_{{platform}}_{{arch}}.tar.gz"
+  }
+}
