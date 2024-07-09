@@ -15,12 +15,11 @@ import (
 	vite_boil "sam.crider/boilerplate-script/vite"
 )
 
-func _main() {
-	// vite_boil.Vite_ClerkAuth()
-	express_boil.Express_ClerkAuth("10009")
+func main() {
+	next_boil.Next_Firebase("test-proddy", "10009")
 }
 
-func main() {
+func _main() {
 
 	// get the user's selected stack
 	stack := utils.Select(
