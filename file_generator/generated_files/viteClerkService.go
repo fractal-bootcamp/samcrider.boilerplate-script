@@ -18,7 +18,7 @@ var File__viteClerkService = []string{
 "      const clerkUser = await clerk.user.getCurrent();",
 "      if (clerkUser) {",
 "        const token = await clerk.session.getToken();",
-"        const response = await axios.get(`${API_URL}/users/current`, {",
+"        const response = await axios.get(`${API_URL}/users`, {",
 "          headers: { Authorization: `Bearer ${token}` }",
 "        });",
 "        return response.data;",
