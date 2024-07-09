@@ -15,11 +15,6 @@ import (
 	vite_boil "sam.crider/boilerplate-script/vite"
 )
 
-func _main() {
-	// vite_boil.Vite_ClerkAuth()
-	express_boil.Express_ClerkAuth("10009")
-}
-
 func main() {
 
 	// get the user's selected stack
@@ -123,7 +118,7 @@ func main() {
 		// TODO: make this a switch case
 		if auth_integration == "Firebase" {
 			// create the app
-			// next_boil.Next_FirebaseAuth(project_name, docker_port_int)
+			next_boil.Next_Firebase(project_name, docker_port)
 
 			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return

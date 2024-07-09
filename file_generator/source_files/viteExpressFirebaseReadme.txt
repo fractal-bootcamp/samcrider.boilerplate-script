@@ -15,6 +15,10 @@
 #### To run frontend:
 1. In terminal: npm run dev
 
+#### Firebase
+- You need to get your firebase config object from the Firebase console (your project on the firebase website) and add it to the .env file.
+- Go look at the .env file to see what variables are needed.
+
 #### To connect to your backend:
 1. Add your backend's url to the frontend .env file
 2. Add this to your package.json: "proxy": "backend url",
