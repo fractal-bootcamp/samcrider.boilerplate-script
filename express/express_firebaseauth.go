@@ -59,8 +59,17 @@ func Express_FirebaseAuth(docker_port string) {
 	// make firebase service account key file
 	utils.Create_File("serviceAccountKey.json", generated.File__serviceAccountKey)
 
-	// make dockerfile
-	utils.Revise_File("docker-compose.yml", generated.File__docker, docker_port)
+	utils.Work_wrapper(func() {
+		// make dockerfile
+		utils.Revise_File("docker-compose.yml", generated.File__docker, docker_port)
+
+		// get docker up
+		cmd_docker := utils.BoundCommand("docker", "compose", "up", "-d")
+		if err := cmd_docker.Run(); err != nil {
+			fmt.Println(err)
+			return
+		}
+	}, "Starting Docker container...")()
 
 	utils.Work_wrapper(func() {
 		// initialize primsa
@@ -70,23 +79,14 @@ func Express_FirebaseAuth(docker_port string) {
 			return
 		}
 
-		// get docker up
-		cmd_docker := utils.BoundCommand("docker", "compose", "up", "-d")
-		if err := cmd_docker.Run(); err != nil {
-			docker_port = utils.Retry_Docker()
-		}
-
 		// replace the .env file
 		err := os.Remove(".env")
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
-		if docker_port == "10009" {
-			utils.Create_File(".env", generated.File__firebaseEnv)
-		} else {
-			utils.Revise_File(".env", generated.File__firebaseEnv, docker_port)
-		}
+
+		utils.Revise_File(".env", generated.File__firebaseEnv, docker_port)
 
 		// replace the gitignore file
 		err = os.Remove(".gitignore")
@@ -120,7 +120,7 @@ func Express_FirebaseAuth(docker_port string) {
 			return
 		}
 
-	}, "Setting up Prisma and Docker...")()
+	}, "Setting up Prisma...")()
 
 	// run a db migration
 	cmd_migration := utils.BoundCommand("npx", "prisma", "migrate", "dev")

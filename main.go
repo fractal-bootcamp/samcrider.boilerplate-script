@@ -15,11 +15,12 @@ import (
 	vite_boil "sam.crider/boilerplate-script/vite"
 )
 
-func _main() {
-
+func main() {
+	express_boil.Express_FirebaseAuth("10009")
+	express_boil.Express_NoAuth("10009")
 }
 
-func main() {
+func _main() {
 
 	// get the user's selected stack
 	stack := utils.Select(
