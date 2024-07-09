@@ -130,8 +130,50 @@ func Vite_NoAuth() {
 
 	utils.Work_wrapper(func() {
 
+		// mkdir components
+		err := os.Mkdir("components", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// cd into components
+		err = os.Chdir("components")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// mkdir pages
+		err = os.Mkdir("pages", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// mkdir compound
+		err = os.Mkdir("compound", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// mkdir base
+		err = os.Mkdir("base", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// cd out of components
+		err = os.Chdir("..")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
 		// mkdir lib
-		err := os.Mkdir("lib", 0755)
+		err = os.Mkdir("lib", 0755)
 		if err != nil {
 			fmt.Println(err)
 			return

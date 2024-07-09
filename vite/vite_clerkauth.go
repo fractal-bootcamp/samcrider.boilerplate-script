@@ -91,6 +91,16 @@ func Vite_ClerkAuth() {
 	// replace the main.tsx file
 	utils.Create_File("main.tsx", generated.File__viteClerkMain)
 
+	// remove the app.tsx file
+	err = os.Remove("app.tsx")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// replace the app.tsx file
+	utils.Create_File("app.tsx", generated.File__viteClerkApp)
+
 	// cd out of src
 	err = os.Chdir("..")
 	if err != nil {
@@ -155,6 +165,48 @@ func Vite_ClerkAuth() {
 	}
 
 	utils.Work_wrapper(func() {
+		// mkdir components
+		err = os.Mkdir("components", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// cd into components
+		err = os.Chdir("components")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// mkdir pages
+		err = os.Mkdir("pages", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// mkdir compound
+		err = os.Mkdir("compound", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// mkdir base
+		err = os.Mkdir("base", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// cd out of components
+		err = os.Chdir("..")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
 		// mkdir lib
 		err := os.Mkdir("lib", 0755)
 		if err != nil {
@@ -169,11 +221,43 @@ func Vite_ClerkAuth() {
 			return
 		}
 
+		// mkdir services
+		err = os.Mkdir("services", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// cd into services
+		err = os.Chdir("services")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// mkdir users
+		err = os.Mkdir("users", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// cd into users
+		err = os.Chdir("users")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// create service file and types file
+		utils.Create_File("service.ts", generated.File__viteClerkService)
+		utils.Create_File("types.ts", generated.File__firebaseAuthTypes)
+
 		// cd back to project root in preparation for creating the backend
 		err = os.Chdir("../../../../")
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
-	}, "Creating Library files...")()
+	}, "Creating Library and Components folders...")()
 }
