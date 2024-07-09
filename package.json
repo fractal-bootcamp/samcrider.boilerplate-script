@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/SamuelRCrider/boilerplate-script#readme",
   "dependencies": {
+    "chicks": "^0.1.1",
     "go-npm": "^0.1.9"
   },
   "postinstall": "go-npm install",
