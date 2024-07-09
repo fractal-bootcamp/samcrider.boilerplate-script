@@ -49,7 +49,7 @@ func Vite_ClerkAuth() {
 
 	utils.Work_wrapper(func() {
 		// create .env file
-		utils.Create_File(".env", generated.File__firebaseFrontEnv)
+		utils.Create_File(".env", generated.File__noAuthFrontEnv)
 
 		// create .env.local file
 		utils.Create_File(".env.local", generated.File__viteClerkEnvLocal)
