@@ -15,12 +15,12 @@ import (
 	vite_boil "sam.crider/boilerplate-script/vite"
 )
 
-func main() {
+func _main() {
 	// vite_boil.Vite_ClerkAuth()
 	express_boil.Express_ClerkAuth("10009")
 }
 
-func _main() {
+func main() {
 
 	// get the user's selected stack
 	stack := utils.Select(
@@ -93,10 +93,10 @@ func _main() {
 			utils.Create_File("README.md", generated.File__viteExpressClerkReadme)
 
 			// create the frontend
-			// vite_boil.Vite_ClerkAuth()
+			vite_boil.Vite_ClerkAuth()
 
 			// create the backend
-			// express_boil.Express_ClerkAuth(docker_port)
+			express_boil.Express_ClerkAuth(docker_port)
 
 			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return
