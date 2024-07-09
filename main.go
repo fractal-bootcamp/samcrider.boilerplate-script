@@ -16,8 +16,8 @@ import (
 )
 
 func main() {
-	express_boil.Express_FirebaseAuth("10009")
-	express_boil.Express_NoAuth("10009")
+	vite_boil.Vite_ClerkAuth()
+	// express_boil.Express_ClerkAuth("10009")
 }
 
 func _main() {

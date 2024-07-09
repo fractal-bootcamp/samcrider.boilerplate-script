@@ -124,26 +124,14 @@ func Vite_NoAuth() {
 
 			utils.Create_File("index.css", generated.File__firebaseFrontIndexCss)
 
-			// cd out of src
-			err = os.Chdir("..")
-			if err != nil {
-				fmt.Println(err)
-				return
-			}
 		}, "Adding Tailwind...")()
 
 	}
 
 	utils.Work_wrapper(func() {
-		// cd into src
-		err := os.Chdir("src")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
 
 		// mkdir lib
-		err = os.Mkdir("lib", 0755)
+		err := os.Mkdir("lib", 0755)
 		if err != nil {
 			fmt.Println(err)
 			return

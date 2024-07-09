@@ -126,13 +126,6 @@ func Vite_FirebaseAuth() {
 
 			utils.Create_File("index.css", generated.File__firebaseFrontIndexCss)
 
-			// cd out of src
-			err = os.Chdir("..")
-			if err != nil {
-				fmt.Println(err)
-				return
-			}
-
 		}, "Adding Tailwind...")()
 
 	}
