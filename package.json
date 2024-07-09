@@ -1,6 +1,6 @@
 {
   "name": "chicks",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An opensource (hopefully) application boilerplate script written in Golang.",
   "main": "index.js",
   "scripts": {
