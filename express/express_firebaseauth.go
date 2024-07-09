@@ -53,20 +53,15 @@ func Express_FirebaseAuth(docker_port string) {
 
 	}, "Installing backend packages...")()
 
+	// make app.ts
+	utils.Create_File("app.ts", generated.File__firebaseAuthApp)
+
+	// make firebase service account key file
+	utils.Create_File("serviceAccountKey.json", generated.File__serviceAccountKey)
+
 	utils.Work_wrapper(func() {
-		// make app.ts
-		utils.Create_File("app.ts", generated.File__firebaseAuthApp)
-
-		// make firebase service account key file
-		utils.Create_File("serviceAccountKey.json", generated.File__serviceAccountKey)
-
 		// make dockerfile
-		if docker_port == "10009" {
-			utils.Create_File("docker-compose.yml", generated.File__docker)
-		} else {
-			utils.Revise_File("docker-compose.yml", generated.File__docker, docker_port)
-
-		}
+		utils.Revise_File("docker-compose.yml", generated.File__docker, docker_port)
 
 		// get docker up
 		cmd_docker := utils.BoundCommand("docker", "compose", "up", "-d")
@@ -74,7 +69,6 @@ func Express_FirebaseAuth(docker_port string) {
 			fmt.Println(err)
 			return
 		}
-
 	}, "Starting Docker container...")()
 
 	utils.Work_wrapper(func() {
@@ -91,11 +85,8 @@ func Express_FirebaseAuth(docker_port string) {
 			fmt.Println(err)
 			return
 		}
-		if docker_port == "10009" {
-			utils.Create_File(".env", generated.File__firebaseEnv)
-		} else {
-			utils.Revise_File(".env", generated.File__firebaseEnv, docker_port)
-		}
+
+		utils.Revise_File(".env", generated.File__firebaseEnv, docker_port)
 
 		// replace the gitignore file
 		err = os.Remove(".gitignore")
