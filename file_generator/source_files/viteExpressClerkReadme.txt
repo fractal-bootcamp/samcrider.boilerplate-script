@@ -6,8 +6,10 @@
     2. No luck? Reload the developer window.
     3. No luck? The .env is probably in the staging area of git. Unstage it.
     4. Still no luck? Look it up or ask for help. (sorry lol)
-
 - Note that a git repo has been initialized in the root directory of your project!
+- I added a user with auth object to the request object in the backend by declaring it in the global.d.ts file. 
+    You may need to go into the global.d.ts file and delete a line, then add it back in and save the file in order for 
+    the global type to be recognized.
 
 
 ## Frontend
@@ -20,8 +22,7 @@
 
 #### To connect to your backend:
 1. Add your backend's url to the frontend .env file
-2. Make sure you include '/api' in the backend url in the .env file
-3. Add this to your package.json: "proxy": "backend url",
+2. Add this to your package.json: "proxy": "backend url",
 
 ## Backend
 #### To run backend: 

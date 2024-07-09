@@ -39,7 +39,7 @@ func Vite_ClerkAuth() {
 
 	utils.Work_wrapper(func() {
 		// import deps
-		cmd := utils.BoundCommand("npm", "install", "axios", "@clerk/clerk-react")
+		cmd := utils.BoundCommand("npm", "install", "axios", "@clerk/clerk-js", "@clerk/clerk-react")
 
 		if err := cmd.Run(); err != nil {
 			fmt.Println(err)
@@ -98,15 +98,8 @@ func Vite_ClerkAuth() {
 		return
 	}
 
-	// replace the app.tsx file
-	utils.Create_File("app.tsx", generated.File__viteClerkApp)
-
-	// cd out of src
-	err = os.Chdir("..")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	// replace the App.tsx file
+	utils.Create_File("App.tsx", generated.File__viteClerkApp)
 
 	// ask if user wants tailwind
 	tailwind_check := utils.Select(
@@ -119,6 +112,14 @@ func Vite_ClerkAuth() {
 
 	if tailwind_check == "Yes" {
 		utils.Work_wrapper(func() {
+
+			// cd out of src
+			err = os.Chdir("..")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
 			// install tailwind
 			cmd := utils.BoundCommand("npm", "install", "-D", "tailwindcss", "postcss", "autoprefixer")
 
@@ -254,7 +255,7 @@ func Vite_ClerkAuth() {
 		utils.Create_File("types.ts", generated.File__firebaseAuthTypes)
 
 		// cd back to project root in preparation for creating the backend
-		err = os.Chdir("../../../../")
+		err = os.Chdir("../../../../../")
 		if err != nil {
 			fmt.Println(err)
 			return
