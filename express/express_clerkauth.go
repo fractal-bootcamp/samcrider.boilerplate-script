@@ -36,7 +36,7 @@ func Express_ClerkAuth(docker_port string) {
 	utils.Work_wrapper(func() {
 
 		// install cors, dotenv, express, nodemon, ts-node
-		cmd_deps := utils.BoundCommand("npm", "install", "express", "cors", "dotenv", "nodemon", "ts-node")
+		cmd_deps := utils.BoundCommand("npm", "install", "express", "cors", "dotenv", "nodemon", "ts-node", "@clerk/clerk-sdk-node")
 
 		if err := cmd_deps.Run(); err != nil {
 			fmt.Println(err)
@@ -47,7 +47,7 @@ func Express_ClerkAuth(docker_port string) {
 	utils.Work_wrapper(func() {
 
 		// install dev deps: cors types, express types, prisma
-		cmd_dev_deps := utils.BoundCommand("npm", "install", "--save-dev", "@types/cors", "@types/express", "prisma")
+		cmd_dev_deps := utils.BoundCommand("npm", "install", "--save-dev", "@types/cors", "@types/express", "prisma", "@clerk/types")
 
 		if err := cmd_dev_deps.Run(); err != nil {
 			fmt.Println(err)
@@ -56,7 +56,7 @@ func Express_ClerkAuth(docker_port string) {
 	}, "Installing backend dev packages...")()
 
 	// make app.ts
-	utils.Create_File("app.ts", generated.File__noAuthApp)
+	utils.Create_File("app.ts", generated.File__expressClerkApp)
 
 	utils.Work_wrapper(func() {
 		// make dockerfile
@@ -85,7 +85,7 @@ func Express_ClerkAuth(docker_port string) {
 			return
 		}
 
-		utils.Revise_File(".env", generated.File__firebaseEnv, docker_port)
+		utils.Revise_File(".env", generated.File__expressClerkEnv, docker_port)
 
 		// cd into prisma
 		err = os.Chdir("prisma")
@@ -101,7 +101,7 @@ func Express_ClerkAuth(docker_port string) {
 			return
 		}
 
-		utils.Create_File("schema.prisma", generated.File__noAuthPrismaSchema)
+		utils.Create_File("schema.prisma", generated.File__expressClerkSchema)
 
 		// cd out of prisma
 		err = os.Chdir("..")
@@ -131,6 +131,9 @@ func Express_ClerkAuth(docker_port string) {
 			fmt.Println(err)
 			return
 		}
+
+		// create global.d.ts file
+		utils.Create_File("global.d.ts", generated.File__expressClerkGlobal)
 
 		// create client.ts file
 		utils.Create_File("client.ts", generated.File__client)
@@ -185,7 +188,7 @@ func Express_ClerkAuth(docker_port string) {
 		}
 
 		// create controller and types files
-		utils.Create_File("controller.ts", generated.File__noAuthController)
+		utils.Create_File("controller.ts", generated.File__expressClerkController)
 		utils.Create_File("types.ts", generated.File__firebaseAuthTypes)
 
 	}, "Creating Utils and Library files...")()

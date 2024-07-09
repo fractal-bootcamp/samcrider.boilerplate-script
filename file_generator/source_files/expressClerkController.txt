@@ -1,56 +1,59 @@
-// userController.ts
-import { PrismaClient } from '@prisma/client';
-import { Request, Response } from 'express';
+// controller.ts
 
-const prisma = new PrismaClient();
+import express from "express";
+import { ClerkExpressRequireAuth } from "@clerk/clerk-sdk-node";
+import client from "../../../utils/client.ts";
 
-export const userController = {
-  getCurrentUser: async (req: Request, res: Response) => {
-    try {
-      const user = await prisma.user.findUnique({
-        where: { clerkId: req.auth.userId }
-      });
-      res.json(user);
-    } catch (error) {
-      console.error('Error getting current user:', error);
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  },
+const router = express.Router();
+const clerkAuth = ClerkExpressRequireAuth();
 
-  createOrUpdateUser: async (req: Request, res: Response) => {
-    try {
-      const user = await prisma.user.upsert({
-        where: { clerkId: req.auth.userId },
-        update: {
-          email: req.body.email,
-          name: req.body.name,
-        },
-        create: {
-          clerkId: req.auth.userId,
-          email: req.body.email,
-          name: req.body.name,
-        },
-      });
-      res.json(user);
-    } catch (error) {
-      console.error('Error creating/updating user:', error);
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  },
+router.get("/users", clerkAuth, async (req, res) => {
+  try {
+    const user = await client.user.findUnique({
+      where: { clerkId: req.auth.userId },
+    });
+    res.json(user);
+  } catch (error) {
+    console.error("Error getting current user:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
-  updateUser: async (req: Request, res: Response) => {
-    try {
-      const user = await prisma.user.update({
-        where: { clerkId: req.auth.userId },
-        data: {
-          email: req.body.email,
-          name: req.body.name,
-        },
-      });
-      res.json(user);
-    } catch (error) {
-      console.error('Error updating user:', error);
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  },
-};
+router.post("/users", clerkAuth, async (req, res) => {
+  try {
+    const user = await client.user.upsert({
+      where: { clerkId: req.auth.userId },
+      update: {
+        email: req.body.email,
+        name: req.body.name,
+      },
+      create: {
+        clerkId: req.auth.userId,
+        email: req.body.email,
+        name: req.body.name,
+      },
+    });
+    res.json(user);
+  } catch (error) {
+    console.error("Error creating/updating user:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+router.put("/users", clerkAuth, async (req, res) => {
+  try {
+    const user = await client.user.update({
+      where: { clerkId: req.auth.userId },
+      data: {
+        email: req.body.email,
+        name: req.body.name,
+      },
+    });
+    res.json(user);
+  } catch (error) {
+    console.error("Error updating user:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+export default router;
