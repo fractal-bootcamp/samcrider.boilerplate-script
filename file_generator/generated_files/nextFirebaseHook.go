@@ -5,8 +5,8 @@ package generated
 var File__nextFirebaseHook = []string{
 "import { useContext } from 'react';",
 "import { signInWithEmailAndPassword, signOut } from 'firebase/auth';",
-"import { auth } from '@/lib/firebase';",
-"import { AuthContext } from '@/components/AuthProvider';",
+"import { AuthContext } from '@/providers/AuthProvider';",
+"import { auth } from '@/lib/firebase/config';",
 "",
 "export function useAuth() {",
 "  const { user, loading } = useContext(AuthContext);",

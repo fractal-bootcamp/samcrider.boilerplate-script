@@ -16,10 +16,6 @@ import (
 )
 
 func main() {
-	next_boil.Next_Firebase("test-proddy", "10009")
-}
-
-func _main() {
 
 	// get the user's selected stack
 	stack := utils.Select(
@@ -122,7 +118,7 @@ func _main() {
 		// TODO: make this a switch case
 		if auth_integration == "Firebase" {
 			// create the app
-			// next_boil.Next_FirebaseAuth(project_name, docker_port_int)
+			next_boil.Next_Firebase(project_name, docker_port)
 
 			fmt.Println("Success! Boilerplate created. Check the root directory README.md for further instructions.")
 			return

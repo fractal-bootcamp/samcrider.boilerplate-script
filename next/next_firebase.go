@@ -225,8 +225,8 @@ func Next_Firebase(project_name string, docker_port string) {
 		// make page.tsx file
 		utils.Create_File("page.tsx", generated.File__nextFirebaseDashboardPage)
 
-		// cd out of dashboard
-		err = os.Chdir("..")
+		// cd out of app
+		err = os.Chdir("../../")
 
 		// mkdir hooks
 		err = os.Mkdir("hooks", 0755)
@@ -273,13 +273,6 @@ func Next_Firebase(project_name string, docker_port string) {
 			return
 		}
 
-		// cd out of pages
-		err = os.Chdir("..")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
 		// mkdir compound
 		err = os.Mkdir("compound", 0755)
 		if err != nil {
@@ -289,6 +282,13 @@ func Next_Firebase(project_name string, docker_port string) {
 
 		// mkdir base
 		err = os.Mkdir("base", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// cd out of components
+		err = os.Chdir("..")
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -311,8 +311,8 @@ func Next_Firebase(project_name string, docker_port string) {
 		// make AuthProvider file
 		utils.Create_File("AuthProvider.tsx", generated.File__nextFirebaseProvider)
 
-		// cd out of components
-		err = os.Chdir("../../")
+		// cd out of providers
+		err = os.Chdir("..")
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -349,6 +349,13 @@ func Next_Firebase(project_name string, docker_port string) {
 		// make middleware file
 		utils.Create_File("middleware.ts", generated.File__nextFirebaseMiddleware)
 
+		// cd out of middleware
+		err = os.Chdir("..")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
 		// mkdir firebase
 		err = os.Mkdir("firebase", 0755)
 		if err != nil {
@@ -365,13 +372,6 @@ func Next_Firebase(project_name string, docker_port string) {
 
 		// create firebase config file
 		utils.Create_File("config.ts", generated.File__nextFirebaseConfig)
-
-		// cd out of firebase
-		err = os.Chdir("..")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
 
 	}, "Creating Utils, Components, and Library folders...")()
 

@@ -7,7 +7,7 @@ var File__nextFirebaseProvider = []string{
 "",
 "import React, { createContext, useEffect, useState } from 'react';",
 "import { User, onAuthStateChanged } from 'firebase/auth';",
-"import { auth } from '@/lib/firebase';",
+"import { auth } from '@/lib/firebase/config';",
 "",
 "export const AuthContext = createContext<{",
 "  user: User | null;",
