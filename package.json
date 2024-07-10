@@ -8,14 +8,14 @@
   },
   "description": "An opensource (hopefully) application boilerplate script written in Golang.",
   "goBinary": {
-    "name": "chicks",
+    "name": "chiks",
     "path": "./bin",
     "url": "https://github.com/SamuelRCrider/boilerplate-script/releases/download/v{{version}}/boilerplate-script_{{version}}_{{platform}}_{{arch}}.tar.gz"
   },
   "homepage": "https://github.com/SamuelRCrider/boilerplate-script#readme",
   "license": "MIT",
   "main": "index.js",
-  "name": "chicks",
+  "name": "chiks",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SamuelRCrider/boilerplate-script.git"
@@ -25,5 +25,5 @@
     "preuninstall": "golang-npm uninstall",
     "test": "echo \"Error: no test specified\" \u0026\u0026 exit 1"
   },
-  "version": "0.2.1"
+  "version": "0.2.2"
 }

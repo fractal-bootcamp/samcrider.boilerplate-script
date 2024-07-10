@@ -1,7 +1,7 @@
 # .goreleaser.yml
 # Build customization
 builds:
-  - binary: chicks
+  - binary: chiks
     goos:
       - linux
       - windows
