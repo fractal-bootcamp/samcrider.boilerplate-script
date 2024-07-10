@@ -1,9 +1,11 @@
-  <h1 style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
-  <span>
-    Hatch Your Next Project With Chiks!
-    </span>
-    <img src="./public/chick.svg" width="50" height="50" alt="Chiks Logo" style="margin-left: 20px;">
-  </h1>
+<div align="center">
+<h1>
+Hatch Your Next Project With Chiks!
+</h1>
+<img src="./public/chick.svg" width="50" height="50" alt="Chiks Logo" style="margin-left: 20px;">
+<img src="./public/chick.svg" width="50" height="50" alt="Chiks Logo" style="margin-left: 20px;">
+<img src="./public/chick.svg" width="50" height="50" alt="Chiks Logo" style="margin-left: 20px;">
+</div>
 
 ### Requirements
 
