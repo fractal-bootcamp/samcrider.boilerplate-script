@@ -1,6 +1,6 @@
 # Hatch Your Next Project With Chiks!
 
-## This is THE boilerplate script for your next project.
+### This is THE boilerplate script for your next project.
 
 ### Requirements
 
