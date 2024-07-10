@@ -1,6 +1,6 @@
 # Hatch Your Next Project With Chiks!
 
-### This is THE boilerplate script for your next project.
+<img src="./public/chick.svg" width="100" height="100" alt="SVG Image">
 
 ### Requirements
 
