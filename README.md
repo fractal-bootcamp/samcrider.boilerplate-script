@@ -1,4 +1,4 @@
-<div style="align-items: center; display: flex; justify-content: center;">
+<div style="align-items: center; display: flex; flex-direction: row; justify-content: center;">
   <h1>Hatch Your Next Project With Chiks!</h1>
   <img src="./public/chick.svg" width="75" height="75" alt="Chiks Logo">
 </div>
