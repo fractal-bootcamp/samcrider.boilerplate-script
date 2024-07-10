@@ -1,6 +1,4 @@
-# Hatch Your Next Project With Chiks!
-
-<img src="./public/chick.svg" width="100" height="100" alt="SVG Image"><img src="./public/chick.svg" width="100" height="100" alt="SVG Image"><img src="./public/chick.svg" width="100" height="100" alt="SVG Image"><img src="./public/chick.svg" width="100" height="100" alt="SVG Image"><img src="./public/chick.svg" width="100" height="100" alt="SVG Image"><img src="./public/chick.svg" width="100" height="100" alt="SVG Image"><img src="./public/chick.svg" width="100" height="100" alt="SVG Image"><img src="./public/chick.svg" width="100" height="100" alt="SVG Image"><img src="./public/chick.svg" width="100" height="100" alt="SVG Image">
+# Hatch Your Next Project With Chiks! <img src="./public/chick.svg" width="100" height="100" alt="SVG Image">
 
 ### Requirements
 
