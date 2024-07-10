@@ -25,19 +25,13 @@ func boundCommand(name string, arg ...string) *exec.Cmd {
 }
 
 func main() {
-	// cd into the root directory
-	err := os.Chdir("../../")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
 	// Read the package.json file
 	data, err := os.ReadFile("package.json")
 	if err != nil {
 		fmt.Println("Error reading package.json:", err)
 		os.Exit(1)
 	}
+	fmt.Println(string(data))
 
 	// Parse the JSON data
 	var pkg PackageJSON
