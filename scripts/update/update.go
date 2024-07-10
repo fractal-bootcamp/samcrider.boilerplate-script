@@ -7,11 +7,6 @@ import (
 	"os/exec"
 )
 
-// struct to parse package.json
-type PackageJSON struct {
-	Version string `json:"version"`
-}
-
 // helper function to execute commands
 func boundCommand(name string, arg ...string) *exec.Cmd {
 	command := exec.Command(name, arg...)
@@ -38,10 +33,9 @@ func main() {
 		fmt.Println("Error reading package.json:", err)
 		os.Exit(1)
 	}
-	fmt.Println(string(data))
 
 	// Parse the JSON data
-	var pkg PackageJSON
+	var pkg map[string]interface{}
 	err = json.Unmarshal(data, &pkg)
 	if err != nil {
 		fmt.Println("Error parsing package.json:", err)
@@ -49,7 +43,12 @@ func main() {
 	}
 
 	// Print the current version
-	fmt.Println("Current version:", pkg.Version)
+	currentVersion, ok := pkg["version"].(string)
+	if !ok {
+		fmt.Println("Error parsing version:", err)
+		os.Exit(1)
+	}
+	fmt.Println("Current version:", currentVersion)
 
 	// Prompt for the new version
 	fmt.Print("Enter new version: ")
@@ -57,7 +56,7 @@ func main() {
 	fmt.Scanln(&newVersion)
 
 	// Update the version
-	pkg.Version = newVersion
+	pkg["version"] = newVersion
 
 	// Marshal the updated struct back to JSON
 	updatedData, err := json.MarshalIndent(pkg, "", "  ")
