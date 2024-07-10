@@ -1,6 +1,6 @@
 {
   "name": "chicks",
-  "version": "0.1.1",
+  "version": "0.1.4",
   "description": "An opensource (hopefully) application boilerplate script written in Golang.",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/SamuelRCrider/boilerplate-script#readme",
   "dependencies": {
-    "chicks": "^0.1.1",
     "go-npm": "^0.1.9"
   },
   "postinstall": "go-npm install",
