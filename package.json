@@ -4,7 +4,7 @@
     "url": "https://github.com/SamuelRCrider/boilerplate-script/issues"
   },
   "dependencies": {
-    "go-npm": "^0.1.9"
+    "golang-npm": "^0.0.6"
   },
   "description": "An opensource (hopefully) application boilerplate script written in Golang.",
   "goBinary": {
@@ -21,9 +21,9 @@
     "url": "git+https://github.com/SamuelRCrider/boilerplate-script.git"
   },
   "scripts": {
-    "postinstall": "go-npm install",
-    "preuninstall": "go-npm uninstall",
+    "postinstall": "golang-npm install",
+    "preuninstall": "golang-npm uninstall",
     "test": "echo \"Error: no test specified\" \u0026\u0026 exit 1"
   },
-  "version": "0.1.9"
+  "version": "0.2.0"
 }
