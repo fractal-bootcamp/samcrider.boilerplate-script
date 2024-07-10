@@ -8,3 +8,8 @@ builds:
       - linux
     goarch:
       - amd64
+      - arm64
+      - arm
+
+universal_binaries:
+  - replace: true
