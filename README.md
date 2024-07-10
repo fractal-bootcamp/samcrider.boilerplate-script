@@ -8,12 +8,12 @@
 
 #### Chiks is your one-stop solution for hatching modern web projects with ease!
 
-[Installation](#%F0%9F%9A%80-installation) •
-[Features](#%E2%9C%A8-features) •
-[Usage](#%E2%9C%8F-usage) •
-[Updating](#`%F0%9F%94%80`-updating) •
-[Uninstalling](#%F0%9F%97%91-uninstalling) •
-[Contributing](#%F0%9F%A4%9D-contributing)
+[Installation](#-installation) •
+[Features](#-features) •
+[Usage](#-usage) •
+[Updating](#-updating) •
+[Uninstalling](#-uninstalling) •
+[Contributing](#-contributing)
 
 </div>
 
