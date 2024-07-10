@@ -104,8 +104,8 @@ This project is licensed under the MIT License - basically, do whatever you want
 
 <div align="center">
 
-[Report a bug](https://github.com/SamuelRCrider/boilerplate-script/issues/new?assignees=&labels=bug&template=bug_report.md&title=) •
-[Request a feature](https://github.com/SamuelRCrider/boilerplate-script/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=) •
-[Contact us](https://github.com/SamuelRCrider/boilerplate-script/issues/new?assignees=&labels=question&template=question.md&title=)
+[Report a bug](https://github.com/SamuelRCrider/chiks/issues/new?assignees=&labels=bug&template=bug_report.md&title=) •
+[Request a feature](https://github.com/SamuelRCrider/chiks/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=) •
+[Contact us](https://github.com/SamuelRCrider/chiks/issues/new?assignees=&labels=question&template=question.md&title=)
 
 </div>

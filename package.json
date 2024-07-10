@@ -1,7 +1,7 @@
 {
   "author": "Samuel R. Crider",
   "bugs": {
-    "url": "https://github.com/SamuelRCrider/boilerplate-script/issues"
+    "url": "https://github.com/SamuelRCrider/chiks/issues"
   },
   "dependencies": {
     "golang-npm": "^0.0.6"
@@ -10,20 +10,20 @@
   "goBinary": {
     "name": "chiks",
     "path": "./bin",
-    "url": "https://github.com/SamuelRCrider/boilerplate-script/releases/download/v{{version}}/boilerplate-script_{{version}}_{{platform}}_{{arch}}.tar.gz"
+    "url": "https://github.com/SamuelRCrider/chiks/releases/download/v{{version}}/boilerplate-script_{{version}}_{{platform}}_{{arch}}.tar.gz"
   },
-  "homepage": "https://github.com/SamuelRCrider/boilerplate-script#readme",
+  "homepage": "https://github.com/SamuelRCrider/chiks#readme",
   "license": "MIT",
   "main": "index.js",
   "name": "chiks",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SamuelRCrider/boilerplate-script.git"
+    "url": "git+https://github.com/SamuelRCrider/chiks.git"
   },
   "scripts": {
     "postinstall": "golang-npm install",
     "preuninstall": "golang-npm uninstall",
     "test": "echo \"Error: no test specified\" \u0026\u0026 exit 1"
   },
-  "version": "0.3.4"
+  "version": "0.3.5"
 }
