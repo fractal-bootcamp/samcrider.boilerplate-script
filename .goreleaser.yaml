@@ -2,8 +2,7 @@
 # Build customization
 builds:
   - binary: chicks
-  - env:
-      - CGO_ENABLED=0
+
     goos:
       - linux
       - windows
