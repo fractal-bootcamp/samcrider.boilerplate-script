@@ -1,3 +1,29 @@
 {
-  "version": "0.1.6"
+  "name": "chicks",
+  "version": "0.1.5",
+  "description": "An opensource (hopefully) application boilerplate script written in Golang.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "go-npm install",
+    "preuninstall": "go-npm uninstall"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamuelRCrider/boilerplate-script.git"
+  },
+  "author": "Samuel R. Crider",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SamuelRCrider/boilerplate-script/issues"
+  },
+  "homepage": "https://github.com/SamuelRCrider/boilerplate-script#readme",
+  "dependencies": {
+    "go-npm": "^0.1.9"
+  },
+  "goBinary": {
+    "name": "chicks",
+    "path": "./bin",
+    "url": "https://github.com/SamuelRCrider/boilerplate-script/releases/download/v{{version}}/boilerplate-script_{{version}}_{{platform}}_{{arch}}.tar.gz"
+  }
 }

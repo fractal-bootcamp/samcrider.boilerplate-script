@@ -25,6 +25,13 @@ func boundCommand(name string, arg ...string) *exec.Cmd {
 }
 
 func main() {
+	// remove the dist folder if it exists
+	err := os.RemoveAll("dist")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
 	// Read the package.json file
 	data, err := os.ReadFile("package.json")
 	if err != nil {
