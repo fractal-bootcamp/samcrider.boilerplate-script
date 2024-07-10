@@ -8,12 +8,12 @@
 
 #### Chiks is your one-stop solution for hatching modern web projects with ease!
 
-[Installation](##installation) •
-[Features](##features) •
-[Usage](#usage) •
-[Updating](#updating) •
-[Uninstalling](#uninstalling) •
-[Contributing](#contributing)
+[Installation](#%F0%9F%9A%80-installation) •
+[Features](#%E2%9C%A8-features) •
+[Usage](#%E2%9C%8F-usage) •
+[Updating](#`%F0%9F%94%80`-updating) •
+[Uninstalling](#%F0%9F%97%91-uninstalling) •
+[Contributing](#%F0%9F%A4%9D-contributing)
 
 </div>
 
@@ -62,7 +62,7 @@ chiks
 
 4. Follow the prompts and watch your project hatch!
 
-### 🔄 Updating
+## 🔄 Updating
 
 Keep Chiks up-to-date with a simple command:
 
@@ -70,7 +70,7 @@ Keep Chiks up-to-date with a simple command:
 npm update -g chiks
 ```
 
-### 🗑 Uninstalling
+## 🗑 Uninstalling
 
 If you need to uninstall Chiks:
 
@@ -102,10 +102,10 @@ This project is licensed under the MIT License - basically, do whatever you want
   Made with ❤️ by the Chiks team
 </h3>
 
-<h5 align="center">
+<div align="center">
 
 [Report a bug](https://github.com/SamuelRCrider/boilerplate-script/issues/new?assignees=&labels=bug&template=bug_report.md&title=) •
 [Request a feature](https://github.com/SamuelRCrider/boilerplate-script/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=) •
 [Contact us](https://github.com/SamuelRCrider/boilerplate-script/issues/new?assignees=&labels=question&template=question.md&title=)
 
-</h5>
+</div>
