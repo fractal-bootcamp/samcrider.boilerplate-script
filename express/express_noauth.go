@@ -10,18 +10,7 @@ import (
 
 func Express_NoAuth(docker_port string) {
 	// mkdir for backend, 0755 is the permission bits
-	err := os.Mkdir("backend", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// cd into the new directory
-	err = os.Chdir("backend")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	utils.Mkdir_chdir("backend")
 
 	// initialize npm project
 	cmd_npm := utils.BoundCommand("npm", "init")
@@ -73,7 +62,7 @@ func Express_NoAuth(docker_port string) {
 		}
 
 		// replace the .env file
-		err = os.Remove(".env")
+		err := os.Remove(".env")
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -114,17 +103,7 @@ func Express_NoAuth(docker_port string) {
 
 	utils.Work_wrapper(func() {
 		// make utils folder, cd into it
-		err = os.Mkdir("utils", 0755)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		err = os.Chdir("utils")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+		utils.Mkdir_chdir("utils")
 
 		// create client.ts file
 		utils.Create_File("client.ts", generated.File__client)
@@ -133,53 +112,20 @@ func Express_NoAuth(docker_port string) {
 		utils.Create_File("global.d.ts", generated.File__expressNoAuthGlobal)
 
 		// cd out of utils
-		err = os.Chdir("..")
+		err := os.Chdir("..")
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 
 		// mkdir lib
-		err = os.Mkdir("lib", 0755)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		// cd lib
-		err = os.Chdir("lib")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+		utils.Mkdir_chdir("lib")
 
 		// mkdir controllers
-		err = os.Mkdir("controllers", 0755)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		// cd into controllers
-		err = os.Chdir("controllers")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+		utils.Mkdir_chdir("controllers")
 
 		// mkdir users
-		err = os.Mkdir("users", 0755)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		// cd into users
-		err = os.Chdir("users")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+		utils.Mkdir_chdir("users")
 
 		// create service file and types file
 		utils.Create_File("controller.ts", generated.File__noAuthController)
