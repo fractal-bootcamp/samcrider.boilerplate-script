@@ -34,32 +34,24 @@ func Next_ClerkAuth(project_name string, docker_port string) {
 
 	utils.Create_File("README.md", generated.File__nextClerkReadme)
 
-	utils.Work_wrapper(func() {
+	// install deps
+	cmd_deps := utils.BoundCommand("npm", "install", "@clerk/nextjs")
 
-		// install deps
-		cmd_deps := utils.BoundCommand("npm", "install", "@clerk/nextjs")
-
-		if err := cmd_deps.Run(); err != nil {
-			fmt.Println(err)
-			return
-		}
-
-	}, "Installing Clerk package...")()
+	if err := cmd_deps.Run(); err != nil {
+		fmt.Println(err)
+		return
+	}
 
 	// make .env.local file
 	utils.Create_File(".env.local", generated.File__nextClerkEnvLocal)
 
-	utils.Work_wrapper(func() {
+	// install dev deps (prisma)
+	cmd_dev_deps := utils.BoundCommand("npm", "install", "--save-dev", "prisma")
 
-		// install dev deps (prisma)
-		cmd_dev_deps := utils.BoundCommand("npm", "install", "--save-dev", "prisma")
-
-		if err := cmd_dev_deps.Run(); err != nil {
-			fmt.Println(err)
-			return
-		}
-
-	}, "Installing project dev packages...")()
+	if err := cmd_dev_deps.Run(); err != nil {
+		fmt.Println(err)
+		return
+	}
 
 	utils.Work_wrapper(func() {
 		// make dockerfile
@@ -207,8 +199,42 @@ func Next_ClerkAuth(project_name string, docker_port string) {
 			return
 		}
 
+		// cd into pages
+		err = os.Chdir("pages")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// create example component
+		utils.Create_File("Example.tsx", generated.File__exampleComponent)
+
+		// cd out of pages
+		err = os.Chdir("..")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
 		// mkdir compound
 		err = os.Mkdir("compound", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// cd into compound
+		err = os.Chdir("compound")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// create example component
+		utils.Create_File("Example.tsx", generated.File__exampleComponent)
+
+		// cd out of compound
+		err = os.Chdir("..")
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -221,8 +247,18 @@ func Next_ClerkAuth(project_name string, docker_port string) {
 			return
 		}
 
+		// cd into base
+		err = os.Chdir("base")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// create example component
+		utils.Create_File("Example.tsx", generated.File__exampleComponent)
+
 		// cd out of components
-		err = os.Chdir("..")
+		err = os.Chdir("../../")
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -272,7 +308,7 @@ func Next_ClerkAuth(project_name string, docker_port string) {
 
 		// create controller and types files
 		utils.Create_File("controller.ts", generated.File__nextNoAuthController)
-		utils.Create_File("types.ts", generated.File__firebaseAuthTypes)
+		utils.Create_File("types.ts", generated.File__firebaseFrontTypes)
 	}, "Creating Utils, Components, and Library folders...")()
 
 }
