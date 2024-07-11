@@ -10,6 +10,9 @@
 - Note that a git repo has been initialized in the root directory of your project!
 
 ## Frontend
+#### Notes
+- If you want to use process.env.[secret], you will need to define it in the vite.config.ts file under where I've defined the API_URL.
+
 #### To run frontend:
 1. In terminal: npm run dev
 
