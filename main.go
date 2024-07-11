@@ -16,9 +16,12 @@ import (
 )
 
 func main() {
-	// vite_boil.Vite_NoAuth()
-	// vite_boil.Vite_ClerkAuth()
-	vite_boil.Vite_FirebaseAuth()
+	express_boil.Express_ClerkAuth("10009")
+	// express_boil.Express_FirebaseAuth("10009")
+	// express_boil.Express_NoAuth("10008")
+	// next_boil.Next_ClerkAuth("clerk-boilerplate", "10007")
+	// next_boil.Next_Firebase("firebase-boilerplate", "10006")
+	// next_boil.Next_NoAuth("no-auth-boilerplate", "10005")
 }
 
 func _main() {
