@@ -10,18 +10,7 @@ import (
 
 func Express_FirebaseAuth(docker_port string) {
 	// mkdir for backend, 0755 is the permission bits
-	err := os.Mkdir("backend", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// cd into the new directory
-	err = os.Chdir("backend")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	utils.Mkdir_chdir("backend")
 
 	// initialize npm project
 	cmd_npm := utils.BoundCommand("npm", "init")
@@ -127,17 +116,7 @@ func Express_FirebaseAuth(docker_port string) {
 
 	utils.Work_wrapper(func() {
 		// make utils folder, cd into it
-		err = os.Mkdir("utils", 0755)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		err = os.Chdir("utils")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+		utils.Mkdir_chdir("utils")
 
 		// create client.ts
 		utils.Create_File("client.ts", generated.File__client)
@@ -148,69 +127,34 @@ func Express_FirebaseAuth(docker_port string) {
 		// create global.d.ts
 		utils.Create_File("global.d.ts", generated.File__expressFirebaseGlobal)
 
-		// cd out of utils and create lib directory
+		// cd out of utils
 		err := os.Chdir("..")
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 
-		err = os.Mkdir("lib", 0755)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+		// mkdir lib
+		utils.Mkdir_chdir("lib")
 
-		// cd into lib
-		err = os.Chdir("lib")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		// mkdir controllers and firebase
-		err = os.Mkdir("controllers", 0755)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		err = os.Mkdir("firebase", 0755)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		// cd into firebase
-		err = os.Chdir("firebase")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+		// mkdir firebase
+		utils.Mkdir_chdir("firebase")
 
 		// create firebase config file
 		utils.Create_File("config.ts", generated.File__firebaseConfig)
 
-		// cd into controllers
-		err = os.Chdir("../controllers")
+		// cd out of firebase
+		err = os.Chdir("..")
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
+
+		// mkdir controllers
+		utils.Mkdir_chdir("controllers")
 
 		// mkdir auth
-		err = os.Mkdir("auth", 0755)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		// cd into it
-		err = os.Chdir("auth")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+		utils.Mkdir_chdir("auth")
 
 		// create controller and types files
 		utils.Create_File("controller.ts", generated.File__firebaseAuthController)
