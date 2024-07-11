@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 	"time"
@@ -54,4 +55,20 @@ func Work_wrapper(wrapped func(), suffix string) func() {
 		s.Stop()
 	}
 
+}
+
+func Mkdir_chdir(dir string) {
+	// create dir
+	err := os.Mkdir(dir, 0755)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// cd into dir
+	err = os.Chdir(dir)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 }
