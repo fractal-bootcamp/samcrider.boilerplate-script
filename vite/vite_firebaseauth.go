@@ -13,7 +13,7 @@ func Vite_FirebaseAuth() {
 
 	// create vite app
 	utils.Work_wrapper(func() {
-		cmd := utils.BoundCommand("npm", "create", "vite@latest", "frontend")
+		cmd := utils.BoundCommand("npx", "create", "vite@latest", "frontend")
 
 		if err := cmd.Run(); err != nil {
 			fmt.Println(err)

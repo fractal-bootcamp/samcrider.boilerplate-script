@@ -11,22 +11,19 @@ import (
 
 func Vite_NoAuth() {
 
-	utils.Work_wrapper(func() {
-		cmd := utils.BoundCommand("npm", "create", "vite@latest", "frontend")
+	cmd := utils.BoundCommand("npx", "create-vite@latest", "frontend")
 
-		if err := cmd.Run(); err != nil {
-			fmt.Println(err)
-			return
-		}
+	if err := cmd.Run(); err != nil {
+		fmt.Println(err)
+		return
+	}
 
-		// cd into frontend
-		err := os.Chdir("frontend")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-	}, "Creating frontend...")()
+	// cd into frontend
+	err := os.Chdir("frontend")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
 	utils.Work_wrapper(func() {
 		// npm install all the vite packages
@@ -124,11 +121,25 @@ func Vite_NoAuth() {
 
 			utils.Create_File("index.css", generated.File__firebaseFrontIndexCss)
 
+			// cd out of src
+			err = os.Chdir("..")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
 		}, "Adding Tailwind...")()
 
 	}
 
 	utils.Work_wrapper(func() {
+
+		// cd into src
+		err = os.Chdir("src")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
 		// mkdir components
 		err := os.Mkdir("components", 0755)

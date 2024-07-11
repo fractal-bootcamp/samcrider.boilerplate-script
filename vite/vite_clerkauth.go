@@ -11,7 +11,7 @@ import (
 func Vite_ClerkAuth() {
 
 	utils.Work_wrapper(func() {
-		cmd := utils.BoundCommand("npm", "create", "vite@latest", "frontend", "--", "--template", "react-ts")
+		cmd := utils.BoundCommand("npx", "create", "vite@latest", "frontend", "--", "--template", "react-ts")
 
 		if err := cmd.Run(); err != nil {
 			fmt.Println(err)

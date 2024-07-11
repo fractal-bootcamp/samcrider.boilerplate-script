@@ -16,6 +16,12 @@ import (
 )
 
 func main() {
+	vite_boil.Vite_NoAuth()
+	// vite_boil.Vite_ClerkAuth()
+	// vite_boil.Vite_FirebaseAuth()
+}
+
+func _main() {
 
 	// get the user's selected stack
 	stack := utils.Select(
