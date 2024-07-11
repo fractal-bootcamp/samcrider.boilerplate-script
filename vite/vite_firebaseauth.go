@@ -131,32 +131,10 @@ func Vite_FirebaseAuth() {
 	}
 
 	// mkdir components
-	err = os.Mkdir("components", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// cd into components
-	err = os.Chdir("components")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	utils.Mkdir_chdir("components")
 
 	// mkdir pages
-	err = os.Mkdir("pages", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// cd into pages
-	err = os.Chdir("pages")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	utils.Mkdir_chdir("pages")
 
 	// create example component
 	utils.Create_File("Example.tsx", generated.File__exampleComponent)
@@ -169,18 +147,7 @@ func Vite_FirebaseAuth() {
 	}
 
 	// mkdir compound
-	err = os.Mkdir("compound", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// cd into compound
-	err = os.Chdir("compound")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	utils.Mkdir_chdir("compound")
 
 	// create example component
 	utils.Create_File("Example.tsx", generated.File__exampleComponent)
@@ -193,18 +160,7 @@ func Vite_FirebaseAuth() {
 	}
 
 	// mkdir base
-	err = os.Mkdir("base", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// cd into base
-	err = os.Chdir("base")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	utils.Mkdir_chdir("base")
 
 	// create example component
 	utils.Create_File("Example.tsx", generated.File__exampleComponent)
@@ -217,62 +173,25 @@ func Vite_FirebaseAuth() {
 	}
 
 	// mkdir lib
-	err = os.Mkdir("lib", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	utils.Mkdir_chdir("lib")
 
-	// cd lib
-	err = os.Chdir("lib")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// mkdir's firebase and services
-	err = os.Mkdir("firebase", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	err = os.Mkdir("services", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// cd into firebase
-	err = os.Chdir("firebase")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	// mkdir firebase
+	utils.Mkdir_chdir("firebase")
 
 	// created firebase config
 	utils.Create_File("config.ts", generated.File__firebaseFrontConfig)
 
-	// cd into services
-	err = os.Chdir("../services")
+	// cd out of firebase
+	err = os.Chdir("..")
 	if err != nil {
 		fmt.Println(err)
-		return
 	}
+
+	// mkdir services
+	utils.Mkdir_chdir("services")
 
 	// mkdir auth
-	err = os.Mkdir("auth", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// cd into auth
-	err = os.Chdir("auth")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	utils.Mkdir_chdir("auth")
 
 	// create service file and types file
 	utils.Create_File("service.ts", generated.File__firebaseFrontService)
