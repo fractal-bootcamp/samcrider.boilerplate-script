@@ -33,27 +33,21 @@ func Express_NoAuth(docker_port string) {
 	// create index.ts file in new project
 	utils.Create_File("index.ts", generated.File__index)
 
-	utils.Work_wrapper(func() {
+	// install cors, dotenv, express, nodemon, ts-node
+	cmd_deps := utils.BoundCommand("npm", "install", "express", "cors", "dotenv", "nodemon", "ts-node")
 
-		// install cors, dotenv, express, nodemon, ts-node
-		cmd_deps := utils.BoundCommand("npm", "install", "express", "cors", "dotenv", "nodemon", "ts-node")
+	if err := cmd_deps.Run(); err != nil {
+		fmt.Println(err)
+		return
+	}
 
-		if err := cmd_deps.Run(); err != nil {
-			fmt.Println(err)
-			return
-		}
-	}, "Installing backend packages...")()
+	// install dev deps: cors types, express types, prisma
+	cmd_dev_deps := utils.BoundCommand("npm", "install", "--save-dev", "@types/cors", "@types/express", "prisma")
 
-	utils.Work_wrapper(func() {
-
-		// install dev deps: cors types, express types, prisma
-		cmd_dev_deps := utils.BoundCommand("npm", "install", "--save-dev", "@types/cors", "@types/express", "prisma")
-
-		if err := cmd_dev_deps.Run(); err != nil {
-			fmt.Println(err)
-			return
-		}
-	}, "Installing backend dev packages...")()
+	if err := cmd_dev_deps.Run(); err != nil {
+		fmt.Println(err)
+		return
+	}
 
 	// make app.ts
 	utils.Create_File("app.ts", generated.File__noAuthApp)
@@ -135,6 +129,9 @@ func Express_NoAuth(docker_port string) {
 		// create client.ts file
 		utils.Create_File("client.ts", generated.File__client)
 
+		// create global.d.ts file
+		utils.Create_File("global.d.ts", generated.File__expressNoAuthGlobal)
+
 		// cd out of utils
 		err = os.Chdir("..")
 		if err != nil {
@@ -186,7 +183,7 @@ func Express_NoAuth(docker_port string) {
 
 		// create service file and types file
 		utils.Create_File("controller.ts", generated.File__noAuthController)
-		utils.Create_File("types.ts", generated.File__firebaseAuthTypes)
+		utils.Create_File("types.ts", generated.File__firebaseFrontTypes)
 
 	}, "Creating Utils and Library files...")()
 }
