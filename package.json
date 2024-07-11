@@ -4,8 +4,6 @@
     "url": "https://github.com/SamuelRCrider/chiks/issues"
   },
   "dependencies": {
-    "axios": "^1.7.2",
-    "firebase": "^10.12.3",
     "golang-npm": "^0.0.6"
   },
   "description": "An opensource (hopefully) application boilerplate script written in Golang.",
@@ -27,5 +25,5 @@
     "preuninstall": "golang-npm uninstall",
     "test": "echo \"Error: no test specified\" \u0026\u0026 exit 1"
   },
-  "version": "0.3.8"
+  "version": "0.3.9"
 }
