@@ -4,6 +4,6 @@ export type UserInputDto = {
 };
 
 export type UserOutputDto = {
-  id: number;
+  id: string;
   email: string;
 };

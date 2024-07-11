@@ -16,8 +16,8 @@ import (
 )
 
 func main() {
-	express_boil.Express_ClerkAuth("10009")
-	// express_boil.Express_FirebaseAuth("10009")
+	// express_boil.Express_ClerkAuth("10009")
+	express_boil.Express_FirebaseAuth("10009")
 	// express_boil.Express_NoAuth("10008")
 	// next_boil.Next_ClerkAuth("clerk-boilerplate", "10007")
 	// next_boil.Next_Firebase("firebase-boilerplate", "10006")
