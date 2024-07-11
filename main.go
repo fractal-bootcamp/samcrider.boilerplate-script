@@ -16,10 +16,6 @@ import (
 )
 
 func main() {
-	next_boil.Next_NoAuth("no-auth-boilerplate", "10005")
-}
-
-func _main() {
 
 	// get the user's selected stack
 	stack := utils.Select(
