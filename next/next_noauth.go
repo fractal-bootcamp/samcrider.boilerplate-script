@@ -119,17 +119,7 @@ func Next_NoAuth(project_name string, docker_port string) {
 		}
 
 		// make utils folder, cd into it
-		err = os.Mkdir("utils", 0755)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		err = os.Chdir("utils")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+		utils.Mkdir_chdir("utils")
 
 		// create client.ts file
 		utils.Create_File("client.ts", generated.File__client)
@@ -142,32 +132,10 @@ func Next_NoAuth(project_name string, docker_port string) {
 		}
 
 		// mkdir components
-		err = os.Mkdir("components", 0755)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		// cd into components
-		err = os.Chdir("components")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+		utils.Mkdir_chdir("components")
 
 		// mkdir pages
-		err = os.Mkdir("pages", 0755)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		// cd into pages
-		err = os.Chdir("pages")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+		utils.Mkdir_chdir("pages")
 
 		// create example component
 		utils.Create_File("Example.tsx", generated.File__exampleComponent)
@@ -180,18 +148,7 @@ func Next_NoAuth(project_name string, docker_port string) {
 		}
 
 		// mkdir compound
-		err = os.Mkdir("compound", 0755)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		// cd into compound
-		err = os.Chdir("compound")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+		utils.Mkdir_chdir("compound")
 
 		// create example component
 		utils.Create_File("Example.tsx", generated.File__exampleComponent)
@@ -204,18 +161,7 @@ func Next_NoAuth(project_name string, docker_port string) {
 		}
 
 		// mkdir base
-		err = os.Mkdir("base", 0755)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		// cd into base
-		err = os.Chdir("base")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+		utils.Mkdir_chdir("base")
 
 		// create example component
 		utils.Create_File("Example.tsx", generated.File__exampleComponent)
@@ -228,46 +174,13 @@ func Next_NoAuth(project_name string, docker_port string) {
 		}
 
 		// mkdir lib
-		err = os.Mkdir("lib", 0755)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		// cd lib
-		err = os.Chdir("lib")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+		utils.Mkdir_chdir("lib")
 
 		// mkdir controllers
-		err = os.Mkdir("controllers", 0755)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		// cd into controllers
-		err = os.Chdir("controllers")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+		utils.Mkdir_chdir("controllers")
 
 		// mkdir users
-		err = os.Mkdir("users", 0755)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		// cd into users
-		err = os.Chdir("users")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
+		utils.Mkdir_chdir("users")
 
 		// create controller and types files
 		utils.Create_File("controller.ts", generated.File__nextNoAuthController)
