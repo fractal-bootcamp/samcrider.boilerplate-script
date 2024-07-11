@@ -130,88 +130,55 @@ func Vite_NoAuth() {
 	}
 
 	// mkdir components
-	err = os.Mkdir("components", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// cd into components
-	err = os.Chdir("components")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	utils.Mkdir_chdir("components")
 
 	// mkdir pages
-	err = os.Mkdir("pages", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	utils.Mkdir_chdir("pages")
 
-	// mkdir compound
-	err = os.Mkdir("compound", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	// make example component
+	utils.Create_File("Example.tsx", generated.File__exampleComponent)
 
-	// mkdir base
-	err = os.Mkdir("base", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// cd out of components
+	// cd out of pages
 	err = os.Chdir("..")
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	// mkdir lib
-	err = os.Mkdir("lib", 0755)
+	// mkdir compound
+	utils.Mkdir_chdir("compound")
+
+	// make example component
+	utils.Create_File("Example.tsx", generated.File__exampleComponent)
+
+	// cd out of compound
+	err = os.Chdir("..")
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	// cd lib
-	err = os.Chdir("lib")
+	// mkdir base
+	utils.Mkdir_chdir("base")
+
+	// make example component
+	utils.Create_File("Example.tsx", generated.File__exampleComponent)
+
+	// cd out of components
+	err = os.Chdir("../../")
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
+
+	// mkdir lib
+	utils.Mkdir_chdir("lib")
 
 	// mkdir services
-	err = os.Mkdir("services", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// cd into services
-	err = os.Chdir("services")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	utils.Mkdir_chdir("services")
 
 	// mkdir users
-	err = os.Mkdir("users", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// cd into users
-	err = os.Chdir("users")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	utils.Mkdir_chdir("users")
 
 	// create service file and types file
 	utils.Create_File("service.ts", generated.File__noAuthService)
