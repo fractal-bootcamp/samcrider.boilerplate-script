@@ -33,25 +33,21 @@ func Express_FirebaseAuth(docker_port string) {
 	// create index.ts file in new project
 	utils.Create_File("index.ts", generated.File__index)
 
-	utils.Work_wrapper(func() {
+	// install cors, dotenv, express, nodemon, ts-node
+	cmd_deps := utils.BoundCommand("npm", "install", "express", "cors", "dotenv", "nodemon", "ts-node", "firebase-admin")
 
-		// install cors, dotenv, express, nodemon, ts-node
-		cmd_deps := utils.BoundCommand("npm", "install", "express", "cors", "dotenv", "nodemon", "ts-node", "firebase-admin")
+	if err := cmd_deps.Run(); err != nil {
+		fmt.Println(err)
+		return
+	}
 
-		if err := cmd_deps.Run(); err != nil {
-			fmt.Println(err)
-			return
-		}
+	// install dev deps: cors types, express types, prisma
+	cmd_dev_deps := utils.BoundCommand("npm", "install", "--save-dev", "@types/cors", "@types/express", "prisma")
 
-		// install dev deps: cors types, express types, prisma
-		cmd_dev_deps := utils.BoundCommand("npm", "install", "--save-dev", "@types/cors", "@types/express", "prisma")
-
-		if err := cmd_dev_deps.Run(); err != nil {
-			fmt.Println(err)
-			return
-		}
-
-	}, "Installing backend packages...")()
+	if err := cmd_dev_deps.Run(); err != nil {
+		fmt.Println(err)
+		return
+	}
 
 	// make app.ts
 	utils.Create_File("app.ts", generated.File__firebaseAuthApp)
@@ -129,26 +125,28 @@ func Express_FirebaseAuth(docker_port string) {
 		return
 	}
 
-	// make utils folder, cd into it
-	err = os.Mkdir("utils", 0755)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	err = os.Chdir("utils")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	// create client.ts
-	utils.Create_File("client.ts", generated.File__client)
-
 	utils.Work_wrapper(func() {
+		// make utils folder, cd into it
+		err = os.Mkdir("utils", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		err = os.Chdir("utils")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// create client.ts
+		utils.Create_File("client.ts", generated.File__client)
 
 		// create requireAuth.ts
 		utils.Create_File("requireAuth.ts", generated.File__firebaseRequireAuth)
+
+		// create global.d.ts
+		utils.Create_File("global.d.ts", generated.File__expressFirebaseGlobal)
 
 		// cd out of utils and create lib directory
 		err := os.Chdir("..")
@@ -216,7 +214,7 @@ func Express_FirebaseAuth(docker_port string) {
 
 		// create controller and types files
 		utils.Create_File("controller.ts", generated.File__firebaseAuthController)
-		utils.Create_File("types.ts", generated.File__firebaseAuthTypes)
+		utils.Create_File("types.ts", generated.File__firebaseFrontTypes)
 
 	}, "Creating Library files...")()
 }

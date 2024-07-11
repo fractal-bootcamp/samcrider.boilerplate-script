@@ -33,27 +33,21 @@ func Express_ClerkAuth(docker_port string) {
 	// create index.ts file in new project
 	utils.Create_File("index.ts", generated.File__index)
 
-	utils.Work_wrapper(func() {
+	// install cors, dotenv, express, nodemon, ts-node
+	cmd_deps := utils.BoundCommand("npm", "install", "express", "cors", "dotenv", "nodemon", "ts-node", "@clerk/clerk-sdk-node")
 
-		// install cors, dotenv, express, nodemon, ts-node
-		cmd_deps := utils.BoundCommand("npm", "install", "express", "cors", "dotenv", "nodemon", "ts-node", "@clerk/clerk-sdk-node")
+	if err := cmd_deps.Run(); err != nil {
+		fmt.Println(err)
+		return
+	}
 
-		if err := cmd_deps.Run(); err != nil {
-			fmt.Println(err)
-			return
-		}
-	}, "Installing backend packages...")()
+	// install dev deps: cors types, express types, prisma
+	cmd_dev_deps := utils.BoundCommand("npm", "install", "--save-dev", "@types/cors", "@types/express", "prisma", "@clerk/types")
 
-	utils.Work_wrapper(func() {
-
-		// install dev deps: cors types, express types, prisma
-		cmd_dev_deps := utils.BoundCommand("npm", "install", "--save-dev", "@types/cors", "@types/express", "prisma", "@clerk/types")
-
-		if err := cmd_dev_deps.Run(); err != nil {
-			fmt.Println(err)
-			return
-		}
-	}, "Installing backend dev packages...")()
+	if err := cmd_dev_deps.Run(); err != nil {
+		fmt.Println(err)
+		return
+	}
 
 	// make app.ts
 	utils.Create_File("app.ts", generated.File__expressClerkApp)

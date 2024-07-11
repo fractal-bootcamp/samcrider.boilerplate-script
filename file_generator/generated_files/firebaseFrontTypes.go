@@ -9,7 +9,7 @@ var File__firebaseFrontTypes = []string{
 "};",
 "",
 "export type UserOutputDto = {",
-"  id: number;",
+"  id: string;",
 "  email: string;",
 "};",
 }

@@ -3,17 +3,6 @@ import { UserOutputDto } from "./types";
 
 const authRouter = express.Router();
 
-declare global {
-  namespace Express {
-    interface Request {
-      user: {
-        id: string;
-        email: string;
-      };
-    }
-  }
-}
-
 authRouter.get("/hydrate", async (req, res) => {
   // user was found in db in requireAuth middleware
   //get user out of req
