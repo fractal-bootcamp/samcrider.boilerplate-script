@@ -16,8 +16,7 @@ import (
 )
 
 func main() {
-	next_boil.Next_Firebase("firebase-boilerplate", "10006")
-	// next_boil.Next_NoAuth("no-auth-boilerplate", "10005")
+	next_boil.Next_NoAuth("no-auth-boilerplate", "10005")
 }
 
 func _main() {
