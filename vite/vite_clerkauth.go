@@ -8,6 +8,9 @@ import (
 	"sam.crider/boilerplate-script/utils"
 )
 
+// ui_check is a global variable that is used to store the user's choice of UI framework
+var ui_check string
+
 func Vite_ClerkAuth() {
 
 	cmd := utils.BoundCommand("npx", "create-vite@latest", "frontend", "--", "--template", "react-ts")
@@ -102,7 +105,7 @@ func Vite_ClerkAuth() {
 
 	if tailwind_check == "Yes" {
 		// ask if user would like to add daisyUI, Shadcn UI, or just Tailwind
-		ui_check := utils.Select(
+		ui_check = utils.Select(
 			"Which UI framework would you like to use?",
 			[]string{
 				"Shadcn UI",
@@ -199,11 +202,70 @@ func Vite_ClerkAuth() {
 			// replace the vite.config.ts file
 			utils.Create_File("vite.config.ts", generated.File__viteShadConfig)
 
-			// run shadcn ui init
-			cmd = utils.BoundCommand("npx", "shadcn-ui@latest", "init")
-			if err := cmd.Run(); err != nil {
-				fmt.Println(err)
-				return
+			// inform user of shadcn ui init
+			choice := utils.Select(
+				"Shadcn UI is about to ask you a bunch of questions. Choose all the defaults and let Chiks configure it for you!",
+				[]string{
+					"Ok - Prefered, recommended choice",
+					"No, I'll do it myself! - May break your boilerplate if you don't know what you're doing",
+				},
+			)
+
+			if choice == "Ok - Prefered, recommended choice" {
+
+				// run shadcn ui init
+				cmd = utils.BoundCommand("npx", "shadcn-ui@latest", "init")
+				if err := cmd.Run(); err != nil {
+					fmt.Println(err)
+					return
+				}
+
+				// remove the components.json file
+				err = os.Remove("components.json")
+				if err != nil {
+					fmt.Println(err)
+					return
+				}
+
+				// replace the components.json file
+				utils.Create_File("components.json", generated.File__viteComponentsJson)
+
+				// remove the components folder
+				err = os.RemoveAll("src/components")
+				if err != nil {
+					fmt.Println(err)
+					return
+				}
+
+				// remove the app folder
+				err = os.RemoveAll("app")
+				if err != nil {
+					fmt.Println(err)
+					return
+				}
+
+				// update index.css file
+				err = os.Remove("src/index.css")
+				if err != nil {
+					fmt.Println(err)
+					return
+				}
+				utils.Create_File("src/index.css", generated.File__viteShadcnIndex)
+
+				// remove the lib folder
+				err = os.RemoveAll("src/lib")
+				if err != nil {
+					fmt.Println(err)
+					return
+				}
+
+			} else {
+				// run shadcn ui init
+				cmd = utils.BoundCommand("npx", "shadcn-ui@latest", "init")
+				if err := cmd.Run(); err != nil {
+					fmt.Println(err)
+					return
+				}
 			}
 
 		} else if ui_check == "DaisyUI" {
@@ -237,6 +299,15 @@ func Vite_ClerkAuth() {
 
 	// mkdir components
 	utils.Mkdir_chdir("components")
+
+	if ui_check == "Shadcn UI" {
+		// mkdir shadcn
+		err = os.Mkdir("shadcn", 0755)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+	}
 
 	// mkdir pages
 	utils.Mkdir_chdir("pages")
@@ -279,6 +350,11 @@ func Vite_ClerkAuth() {
 
 	// mkdir lib
 	utils.Mkdir_chdir("lib")
+
+	if ui_check == "Shadcn UI" {
+		// make utils file
+		utils.Create_File("utils.ts", generated.File__viteShadcnUtils)
+	}
 
 	// mkdir services
 	utils.Mkdir_chdir("services")
