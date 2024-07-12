@@ -50,7 +50,7 @@ Sets up a Prisma database and runs your first migration
 - Select your desired Docker port
 - Opt for Tailwind CSS integration
 
-## ✏️ Usage
+## 📝 Usage
 
 1. Open your terminal
 2. Navigate to your projects directory
