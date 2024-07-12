@@ -15,15 +15,34 @@ import (
 	vite_boil "sam.crider/boilerplate-script/vite"
 )
 
+// stacks is a list of all the stacks that the user can select
+var stacks = []string{
+	"Vite + Express",
+	"Next.js",
+	"Add Your Own: (https://github.com/SamuelRCrider/chiks/CONTRIBUTING.md)",
+}
+
 func main() {
+
+	// parse args
+	args := os.Args[1:]
+
+	fmt.Println(args)
+
+	if len(args) > 0 {
+		if args[0] == "--help" {
+			utils.PrintHelp()
+			return
+		}
+		// for now, we only support the --help flag
+		fmt.Println("Currently, we only support the --help flag")
+		return
+	}
 
 	// get the user's selected stack
 	stack := utils.Select(
 		"Select Your Build Stack:",
-		[]string{
-			"Vite + Express",
-			"Next.js",
-		},
+		stacks,
 	)
 
 	// get the user's project name

@@ -21,6 +21,7 @@ func boundCommand(name string, arg ...string) *exec.Cmd {
 	return command
 }
 
+// update.go is a script that updates the version of the project and publishes it to npm
 func main() {
 
 	// load .env file
