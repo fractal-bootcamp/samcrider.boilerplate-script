@@ -13,6 +13,21 @@
     "url": "https://github.com/SamuelRCrider/chiks/releases/download/v{{version}}/chiks_{{version}}_{{platform}}_{{arch}}.tar.gz"
   },
   "homepage": "https://github.com/SamuelRCrider/chiks#readme",
+  "keywords": [
+    "boilerplate",
+    "script",
+    "golang",
+    "nextjs",
+    "express",
+    "vite",
+    "clerk",
+    "firebase",
+    "chicks",
+    "chiks",
+    "database",
+    "full-stack",
+    "typescript"
+  ],
   "license": "MIT",
   "main": "index.js",
   "name": "chiks",
@@ -25,5 +40,5 @@
     "preuninstall": "golang-npm uninstall",
     "test": "echo \"Error: no test specified\" \u0026\u0026 exit 1"
   },
-  "version": "0.4.8"
+  "version": "0.4.9"
 }
