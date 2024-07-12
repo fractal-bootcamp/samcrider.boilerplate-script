@@ -5,7 +5,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"slices"
 
 	generated "sam.crider/boilerplate-script/file_generator/generated_files"
 
@@ -20,7 +19,7 @@ import (
 var stacks = []string{
 	"Vite + Express",
 	"Next.js",
-	"Add Your Own",
+	"Add Your Own: (https://github.com/SamuelRCrider/chiks/CONTRIBUTING.md)",
 }
 
 func main() {
@@ -28,8 +27,10 @@ func main() {
 	// parse args
 	args := os.Args[1:]
 
+	fmt.Println(args)
+
 	if len(args) > 0 {
-		if slices.Contains(stacks, "--help") {
+		if args[0] == "--help" {
 			utils.PrintHelp()
 			return
 		}
