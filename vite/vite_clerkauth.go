@@ -111,7 +111,7 @@ func Vite_ClerkAuth() {
 			},
 		)
 
-		// install tailwind
+		/* install tailwind */
 
 		// cd out of src
 		err = os.Chdir("..")
@@ -183,7 +183,7 @@ func Vite_ClerkAuth() {
 			utils.Create_File("tsconfig.json", generated.File__viteTsconfig)
 
 			// install node types
-			cmd = utils.BoundCommand("npm", "install", "--save-dev", "@types/node")
+			cmd = utils.BoundCommand("npm", "i", "-D", "@types/node")
 			if err := cmd.Run(); err != nil {
 				fmt.Println(err)
 				return
@@ -206,9 +206,46 @@ func Vite_ClerkAuth() {
 				return
 			}
 
+			// cd into src
+			err = os.Chdir("src")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
 		} else if ui_check == "DaisyUI" {
 			// install tailwind with daisy ui
 
+			// cd out of src
+			err = os.Chdir("..")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
+			// install daisy ui
+			cmd = utils.BoundCommand("npm", "i", "-D", "daisyui")
+			if err := cmd.Run(); err != nil {
+				fmt.Println(err)
+				return
+			}
+
+			// remove the tailwind.config.js file
+			err = os.Remove("tailwind.config.js")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
+			// replace the tailwind.config.js file
+			utils.Create_File("tailwind.config.js", generated.File__viteDaisyTconfig)
+
+			// cd into src
+			err = os.Chdir("src")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
 		}
 	}
 
