@@ -49,6 +49,9 @@ Sets up a Prisma database and runs your first migration
 - Choose your preferred auth integration
 - Select your desired Docker port
 - Opt for Tailwind CSS integration
+  - Additional UI framework options:
+    - Shadcn UI
+    - DaisyUI
 
 ## 📝 Usage
 
