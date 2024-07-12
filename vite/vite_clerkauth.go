@@ -227,13 +227,12 @@ func Vite_ClerkAuth() {
 			utils.Create_File("tailwind.config.js", generated.File__viteDaisyTconfig)
 
 		}
-	}
-
-	// cd into src
-	err = os.Chdir("src")
-	if err != nil {
-		fmt.Println(err)
-		return
+		// cd into src
+		err = os.Chdir("src")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 	}
 
 	// mkdir components
