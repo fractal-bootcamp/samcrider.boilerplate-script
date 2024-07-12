@@ -161,16 +161,16 @@ func Vite_ClerkAuth() {
 
 		utils.Create_File("index.css", generated.File__firebaseFrontIndexCss)
 
+		// cd out of src
+		err = os.Chdir("..")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
 		// TODO: make this a switch case if we want to add more UI frameworks
 		if ui_check == "Shadcn UI" {
 			// install tailwind with shadcn ui
-
-			// cd out of src
-			err = os.Chdir("..")
-			if err != nil {
-				fmt.Println(err)
-				return
-			}
 
 			// remove the tsconfig.json file
 			err = os.Remove("tsconfig.json")
@@ -206,22 +206,8 @@ func Vite_ClerkAuth() {
 				return
 			}
 
-			// cd into src
-			err = os.Chdir("src")
-			if err != nil {
-				fmt.Println(err)
-				return
-			}
-
 		} else if ui_check == "DaisyUI" {
 			// install tailwind with daisy ui
-
-			// cd out of src
-			err = os.Chdir("..")
-			if err != nil {
-				fmt.Println(err)
-				return
-			}
 
 			// install daisy ui
 			cmd = utils.BoundCommand("npm", "i", "-D", "daisyui")
@@ -240,13 +226,14 @@ func Vite_ClerkAuth() {
 			// replace the tailwind.config.js file
 			utils.Create_File("tailwind.config.js", generated.File__viteDaisyTconfig)
 
-			// cd into src
-			err = os.Chdir("src")
-			if err != nil {
-				fmt.Println(err)
-				return
-			}
 		}
+	}
+
+	// cd into src
+	err = os.Chdir("src")
+	if err != nil {
+		fmt.Println(err)
+		return
 	}
 
 	// mkdir components
