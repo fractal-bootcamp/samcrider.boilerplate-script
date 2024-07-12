@@ -16,8 +16,8 @@ var File__viteComponentsJson = []string{
 "    \"prefix\": \"\"",
 "  },",
 "  \"aliases\": {",
-"    \"components\": \"@/src/components/shadcn\",",
-"    \"utils\": \"@/src/lib/utils\"",
+"    \"components\": \"@/components/shadcn\",",
+"    \"utils\": \"@/lib/utils\"",
 "  }",
 "}",
 }
