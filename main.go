@@ -23,6 +23,10 @@ var stacks = []string{
 }
 
 func main() {
+	vite_boil.Vite_ClerkAuth()
+}
+
+func _main() {
 
 	// parse args
 	args := os.Args[1:]

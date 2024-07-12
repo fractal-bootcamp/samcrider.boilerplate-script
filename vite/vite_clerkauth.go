@@ -101,6 +101,17 @@ func Vite_ClerkAuth() {
 	)
 
 	if tailwind_check == "Yes" {
+		// ask if user would like to add daisyUI, Shadcn UI, or just Tailwind
+		ui_check := utils.Select(
+			"Which UI framework would you like to use?",
+			[]string{
+				"Shadcn UI",
+				"DaisyUI",
+				"None (base Tailwind)",
+			},
+		)
+
+		// install tailwind
 
 		// cd out of src
 		err = os.Chdir("..")
@@ -150,6 +161,55 @@ func Vite_ClerkAuth() {
 
 		utils.Create_File("index.css", generated.File__firebaseFrontIndexCss)
 
+		// TODO: make this a switch case if we want to add more UI frameworks
+		if ui_check == "Shadcn UI" {
+			// install tailwind with shadcn ui
+
+			// cd out of src
+			err = os.Chdir("..")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
+			// remove the tsconfig.json file
+			err = os.Remove("tsconfig.json")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
+			// replace the tsconfig.json file
+			utils.Create_File("tsconfig.json", generated.File__viteTsconfig)
+
+			// install node types
+			cmd = utils.BoundCommand("npm", "install", "--save-dev", "@types/node")
+			if err := cmd.Run(); err != nil {
+				fmt.Println(err)
+				return
+			}
+
+			// remove the vite.config.ts file
+			err = os.Remove("vite.config.ts")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
+			// replace the vite.config.ts file
+			utils.Create_File("vite.config.ts", generated.File__viteShadConfig)
+
+			// run shadcn ui init
+			cmd = utils.BoundCommand("npx", "shadcn-ui@latest", "init")
+			if err := cmd.Run(); err != nil {
+				fmt.Println(err)
+				return
+			}
+
+		} else if ui_check == "DaisyUI" {
+			// install tailwind with daisy ui
+
+		}
 	}
 
 	// mkdir components
