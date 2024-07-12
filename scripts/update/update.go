@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+
+	"github.com/joho/godotenv"
 )
 
 // helper function to execute commands
@@ -20,8 +22,16 @@ func boundCommand(name string, arg ...string) *exec.Cmd {
 }
 
 func main() {
+
+	// load .env file
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
 	// remove the dist folder if it exists
-	err := os.RemoveAll("dist")
+	err = os.RemoveAll("dist")
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -90,6 +100,13 @@ func main() {
 
 	// git push origin main
 	cmd = boundCommand("git", "push", "origin", "main")
+	if err := cmd.Run(); err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	// export github token from env
+	cmd = boundCommand("export", "GITHUB_TOKEN="+os.Getenv("GITHUB_TOKEN"))
 	if err := cmd.Run(); err != nil {
 		fmt.Println(err)
 		return
