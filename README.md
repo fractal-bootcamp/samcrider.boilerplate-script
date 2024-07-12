@@ -92,7 +92,7 @@ NOTE: Due to npm v7+, uninstall scripts won't work, so the package's preuninstal
 
 #### Please contribute!
 
-We don't have a contributing guide yet, but we're working on it. In the meantime, feel free to open an issue or submit a pull request.
+We have a contributing guide! Check it out [here](https://github.com/SamuelRCrider/chiks/CONTRIBUTING.md). This is especially important if you want to add a new stack to Chiks.
 
 ## 📄 License
 
