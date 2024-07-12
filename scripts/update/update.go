@@ -106,7 +106,7 @@ func main() {
 	}
 
 	// export github token from env
-	cmd = boundCommand("export", "GITHUB_TOKEN="+os.Getenv("GITHUB_TOKEN"))
+	cmd = boundCommand("sh", "-c", "export", "GITHUB_TOKEN="+os.Getenv("GITHUB_TOKEN"))
 	if err := cmd.Run(); err != nil {
 		fmt.Println(err)
 		return
