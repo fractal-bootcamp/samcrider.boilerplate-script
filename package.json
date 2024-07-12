@@ -27,7 +27,8 @@
     "database",
     "full-stack",
     "fulstack",
-    "typescript"
+    "typescript",
+    "cli"
   ],
   "license": "MIT",
   "main": "index.js",

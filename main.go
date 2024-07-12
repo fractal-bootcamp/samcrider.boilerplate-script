@@ -5,6 +5,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"slices"
 
 	generated "sam.crider/boilerplate-script/file_generator/generated_files"
 
@@ -15,15 +16,32 @@ import (
 	vite_boil "sam.crider/boilerplate-script/vite"
 )
 
+// stacks is a list of all the stacks that the user can select
+var stacks = []string{
+	"Vite + Express",
+	"Next.js",
+	"Add Your Own",
+}
+
 func main() {
+
+	// parse args
+	args := os.Args[1:]
+
+	if len(args) > 0 {
+		if slices.Contains(stacks, "--help") {
+			utils.PrintHelp()
+			return
+		}
+		// for now, we only support the --help flag
+		fmt.Println("Currently, we only support the --help flag")
+		return
+	}
 
 	// get the user's selected stack
 	stack := utils.Select(
 		"Select Your Build Stack:",
-		[]string{
-			"Vite + Express",
-			"Next.js",
-		},
+		stacks,
 	)
 
 	// get the user's project name
