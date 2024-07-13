@@ -23,8 +23,7 @@ var stacks = []string{
 }
 
 func main() {
-	vite_boil.Vite_ClerkAuth()
-	// vite_boil.Vite_FirebaseAuth()
+	vite_boil.Vite_FirebaseAuth()
 	// vite_boil.Vite_NoAuth()
 }
 
