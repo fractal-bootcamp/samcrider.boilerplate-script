@@ -23,7 +23,9 @@ var stacks = []string{
 }
 
 func main() {
-	vite_boil.Vite_NoAuth()
+	// next_boil.Next_Firebase("chiks", utils.GetDockerPort())
+	next_boil.Next_ClerkAuth("chiks2", utils.GetDockerPort())
+	// next_boil.Next_NoAuth("chiks3", utils.GetDockerPort())
 }
 
 func _main() {
