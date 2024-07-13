@@ -73,7 +73,18 @@ func Vite_FirebaseAuth() {
 	)
 
 	if tailwind_check == "Yes" {
-		// install tailwind
+		// ask if user would like to add daisyUI, Shadcn UI, or just Tailwind
+		ui_check := utils.Select(
+			"Which UI framework would you like to use?",
+			[]string{
+				"Shadcn UI",
+				"DaisyUI",
+				"None (base Tailwind)",
+			},
+		)
+
+		/* install tailwind */
+
 		cmd := utils.BoundCommand("npm", "install", "-D", "tailwindcss", "postcss", "autoprefixer")
 
 		if err := cmd.Run(); err != nil {
@@ -119,6 +130,66 @@ func Vite_FirebaseAuth() {
 		if err != nil {
 			fmt.Println(err)
 			return
+		}
+
+		// TODO: make this a switch case if we want to add more UI frameworks
+		if ui_check == "Shadcn UI" {
+			// install tailwind with shadcn ui
+
+			// remove the tsconfig.json file
+			err = os.Remove("tsconfig.json")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
+			// replace the tsconfig.json file
+			utils.Create_File("tsconfig.json", generated.File__viteTsconfig)
+
+			// install node types
+			cmd = utils.BoundCommand("npm", "i", "-D", "@types/node")
+			if err := cmd.Run(); err != nil {
+				fmt.Println(err)
+				return
+			}
+
+			// remove the vite.config.ts file
+			err = os.Remove("vite.config.ts")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
+			// replace the vite.config.ts file
+			utils.Create_File("vite.config.ts", generated.File__viteShadConfig)
+
+			// run shadcn ui init
+			cmd = utils.BoundCommand("npx", "shadcn-ui@latest", "init")
+			if err := cmd.Run(); err != nil {
+				fmt.Println(err)
+				return
+			}
+
+		} else if ui_check == "DaisyUI" {
+			// install tailwind with daisy ui
+
+			// install daisy ui
+			cmd = utils.BoundCommand("npm", "i", "-D", "daisyui")
+			if err := cmd.Run(); err != nil {
+				fmt.Println(err)
+				return
+			}
+
+			// remove the tailwind.config.js file
+			err = os.Remove("tailwind.config.js")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
+			// replace the tailwind.config.js file
+			utils.Create_File("tailwind.config.js", generated.File__viteDaisyTconfig)
+
 		}
 
 	}

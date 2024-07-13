@@ -49,6 +49,9 @@ Sets up a Prisma database and runs your first migration
 - Choose your preferred auth integration
 - Select your desired Docker port
 - Opt for Tailwind CSS integration
+  - Additional UI framework options:
+    - Shadcn UI
+    - DaisyUI
 
 ## 📝 Usage
 
@@ -92,7 +95,7 @@ NOTE: Due to npm v7+, uninstall scripts won't work, so the package's preuninstal
 
 #### Please contribute!
 
-We have a contributing guide! Check it out [here](https://github.com/SamuelRCrider/chiks/CONTRIBUTING.md). This is especially important if you want to add a new stack to Chiks.
+We have a contributing guide! Check it out [here](https://github.com/SamuelRCrider/chiks/blob/main/CONTRIBUTING.md). This is especially important if you want to add a new stack to Chiks.
 
 ## 📄 License
 
