@@ -24,6 +24,8 @@ var File__viteExpressClerkReadme = []string{
 "",
 "#### To run frontend:",
 "1. In terminal: npm run dev",
+"    - Note that you have errors in the console and the brower page is blank.",
+"    - Follow the steps below in the Clerk section to fix this.",
 "",
 "#### Clerk",
 "- You need to go to the clerk website and create a new project.",

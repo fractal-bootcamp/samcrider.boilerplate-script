@@ -9,6 +9,9 @@ import (
 	"sam.crider/boilerplate-script/utils"
 )
 
+// ui_check is a global variable that is used to store the user's choice of UI framework
+var ui_check string
+
 func Next_ClerkAuth(project_name string, docker_port string) {
 	// create next app
 	cmd := utils.BoundCommand("npx", "create-next-app", project_name, "--typescript")
@@ -23,6 +26,72 @@ func Next_ClerkAuth(project_name string, docker_port string) {
 	if err != nil {
 		fmt.Println(err)
 		return
+	}
+
+	// check if there is a tailwind.config.js file
+	if _, err := os.Stat("tailwind.config.ts"); err == nil {
+		// if there is, ask if user wants to use daisyUI, shadcn UI, or just Tailwind
+		ui_check = utils.Select(
+			"Which UI framework would you like to use?",
+			[]string{
+				"Shadcn UI",
+				"DaisyUI",
+				"None (base Tailwind)",
+			},
+		)
+
+		// TODO: make this a switch case if we want to add more UI frameworks
+		if ui_check == "Shadcn UI" {
+			// install tailwind with shadcn ui
+			// Run the shadcn-ui init command
+			cmd := utils.BoundCommand("npx", "shadcn-ui@latest", "init")
+			if err := cmd.Run(); err != nil {
+				fmt.Println(err)
+				return
+			}
+
+			// remove the components.json file
+			err = os.Remove("components.json")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
+			// replace the components.json file
+			utils.Create_File("components.json", generated.File__nextComponentsJson)
+
+			// remove the lib folder
+			err = os.RemoveAll("src/lib")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
+			// remove the components folder
+			err = os.RemoveAll("src/components")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+
+		} else if ui_check == "DaisyUI" {
+			// install tailwind with daisy ui
+			// Run the daisy init command
+			cmd := utils.BoundCommand("npm", "i", "-D", "daisyui")
+			if err := cmd.Run(); err != nil {
+				fmt.Println(err)
+				return
+			}
+
+			// replace the tailwind.config.ts file
+			err = os.Remove("tailwind.config.ts")
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+			utils.Create_File("tailwind.config.ts", generated.File__nextTailwindConfig)
+
+		}
 	}
 
 	// remove readme and replace with clerk readme
@@ -171,6 +240,15 @@ func Next_ClerkAuth(project_name string, docker_port string) {
 		// mkdir components
 		utils.Mkdir_chdir("components")
 
+		if ui_check == "Shadcn UI" {
+			// mkdir shadcn
+			err = os.Mkdir("shadcn", 0755)
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+		}
+
 		// mkdir pages
 		utils.Mkdir_chdir("pages")
 
@@ -212,6 +290,11 @@ func Next_ClerkAuth(project_name string, docker_port string) {
 
 		// mkdir lib
 		utils.Mkdir_chdir("lib")
+
+		if ui_check == "Shadcn UI" {
+			// make utils file
+			utils.Create_File("utils.ts", generated.File__viteShadcnUtils)
+		}
 
 		// mkdir controllers
 		utils.Mkdir_chdir("controllers")
