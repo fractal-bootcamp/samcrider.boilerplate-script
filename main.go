@@ -5,8 +5,11 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	generated "sam.crider/boilerplate-script/file_generator/generated_files"
+
+	frontend_only_boil "sam.crider/boilerplate-script/frontend_only"
 
 	next_boil "sam.crider/boilerplate-script/next"
 
@@ -52,6 +55,12 @@ func main() {
 		"What's the name of this project?",
 	)
 
+	// if the stack is frontend only, run the FrontendOnly function
+	if strings.Contains(stack, "Frontend") {
+		frontend_only_boil.FrontendOnly(stack, project_name)
+		return
+	}
+
 	// get users auth preference
 	auth_integration := utils.Select(
 		"Pick an auth integration:",
@@ -67,10 +76,6 @@ func main() {
 
 	// switch case for stack
 	switch stack {
-	case "Vite (Frontend Only)":
-
-	case "Next.js (Frontend Only)":
-
 	case "Vite + Express":
 		utils.Work_wrapper(func() {
 			// create a directory for the project, 0755 is the permission bits
