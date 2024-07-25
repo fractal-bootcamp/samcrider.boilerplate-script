@@ -50,6 +50,13 @@ func main() {
 		stacks,
 	)
 
+	if strings.Contains(stack, "Add Your Own") {
+		// link to the contributing guide
+		utils.Open("https://github.com/SamuelRCrider/chiks/blob/main/CONTRIBUTING.md")
+		return
+
+	}
+
 	// get the user's project name
 	project_name := utils.Input(
 		"What's the name of this project?",
