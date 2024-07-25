@@ -205,10 +205,10 @@ func Next_FrontendClerk(project_name string) {
 			return
 		}
 
-		// mkdir lib
-		utils.Mkdir_chdir("lib")
-
 		if ui_check == "Shadcn UI" {
+			// mkdir lib
+			utils.Mkdir_chdir("lib")
+
 			// make utils file
 			utils.Create_File("utils.ts", generated.File__viteShadcnUtils)
 		}
